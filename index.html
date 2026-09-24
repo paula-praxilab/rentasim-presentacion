@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentaSim · Guía para docentes · PraxiLab</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #2455D9;
+            --primary-dark: #101B3D;
+            --primary-mid: #16307A;
+            --primary-light: #7FA0F5;
+            --rentasim: #4A968E;
+            --rentasim-dark: #2D6D66;
+            --rentasim-light: #A9D2CC;
+            --rentasim-deep: #1B3E3A;
+            --rentasim-mist: #F1F8F7;
+            --accent-green: #16A34A;
+            --accent-amber: #D97706;
+            --accent-red: #DC2626;
+            --accent-purple: #6D5BD0;
+            --dark: #1B2333;
+            --gray: #5B6472;
+            --gray-light: #E3E8F0;
+            --light: #F3F6FB;
+            --white: #ffffff;
+            --shadow: 0 10px 40px rgba(16,27,61,0.14);
+            --shadow-hover: 0 20px 60px rgba(16,27,61,0.22);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { font-size: 122%; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--rentasim-mist) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .presentation-container { max-width: 1220px; margin: 0 auto; padding: 20px; padding-bottom: 100px; }
+
+        .slide { display: none; animation: fadeIn 0.6s ease; background: var(--white); border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; min-height: 80vh; }
+        .slide.active { display: flex; flex-direction: column; }
+        .slide.active > .hero, .slide.active > .closing { flex: 1; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slide-header { background: linear-gradient(135deg, var(--rentasim-dark) 0%, var(--rentasim) 100%); color: var(--white); padding: 36px 50px; position: relative; overflow: hidden; }
+        .slide-header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 380px; height: 380px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+        .slide-header .block-tag { display:inline-block; font-family:'Inter'; font-weight:700; font-size:0.7em; letter-spacing:1.2px; text-transform:uppercase; color: #fff; background: rgba(255,255,255,0.18); padding:4px 12px; border-radius:20px; margin-bottom:10px; position:relative; z-index:1; }
+        .slide-header h1 { font-family: 'Fraunces', serif; font-size: 1.95em; font-weight: 700; margin-bottom: 6px; position: relative; z-index: 1; padding-right: 120px; }
+        .slide-header h2 { font-family: 'Inter', sans-serif; font-size: 1em; font-weight: 400; opacity: 0.92; position: relative; z-index: 1; padding-right: 120px; }
+        @media (max-width: 768px) { .slide-header h1, .slide-header h2 { padding-right: 0; } }
+
+        .slide-number { position: absolute; bottom: 14px; right: 40px; font-size: 3.8em; font-weight: 800; opacity: 0.14; font-family: 'Fraunces', serif; z-index: 0; }
+        .slide-content { padding: 36px 50px 46px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 26px; }
+        .slide-content > * { margin-top: 0 !important; }
+        .slide-content > p.lead { color: #55606E; line-height: 1.65; font-size: 0.87em; }
+        .slide-content strong { color: var(--dark); }
+        h3.sub-h { font-family: 'Fraunces', serif; color: var(--primary-mid); font-size: 1.1em; margin-bottom: 8px; font-weight: 600; }
+        h3.sub-h.teal { color: var(--rentasim-dark); }
+
+        /* ===== NAV ===== */
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -5px 30px rgba(0,0,0,0.3); }
+        .nav-btn { background: var(--rentasim-dark); color: var(--white); border: none; padding: 11px 26px; border-radius: 30px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.92em; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .nav-btn:hover { background: var(--rentasim-deep); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(45,109,102,0.5); }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .slide-counter { color: var(--white); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.02em; }
+
+        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(90deg, var(--rentasim), var(--rentasim-light)); transition: width 0.4s ease; z-index: 1001; }
+
+        /* ===== BRAND LOCKUP ===== */
+        .brand-lockup { display: inline-flex; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.05em; }
+        .brand-lockup .bl-praxi { color: var(--dark); }
+        .brand-lockup .bl-lab { color: var(--primary); }
+        .brand-lockup .bl-sep { width: 2px; height: 1em; background: var(--rentasim); opacity: 0.7; }
+        .brand-lockup .bl-mod { color: var(--rentasim-dark); font-weight: 700; }
+        .brand-lockup.on-dark .bl-praxi { color: rgba(255,255,255,0.92); }
+        .brand-lockup.on-dark .bl-lab { color: var(--primary-light); }
+        .brand-lockup.on-dark .bl-sep { background: var(--rentasim-light); }
+        .brand-lockup.on-dark .bl-mod { color: var(--rentasim-light); }
+
+        /* ===== CARDS ===== */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; margin-top: 22px; }
+        .card-grid.cols4 { grid-template-columns: repeat(4, 1fr); }
+        .card-grid.cols4 .card { padding: 18px 18px; }
+        .card-grid.cols4 .card h3 { font-size: 1em; }
+        .card-grid.cols3 { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 1024px) { .card-grid.cols4, .card-grid.cols3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .card-grid.cols4, .card-grid.cols3 { grid-template-columns: 1fr; } }
+        .card-grid.cols3-centered { display: flex; flex-wrap: wrap; justify-content: center; }
+        .card-grid.cols3-centered .card { flex: 0 1 calc(33.333% - 15px); }
+        @media (max-width: 1024px) { .card-grid.cols3-centered .card { flex-basis: calc(50% - 11px); } }
+        @media (max-width: 560px) { .card-grid.cols3-centered .card { flex-basis: 100%; } }
+        .card-grid.cols2-centered { display: flex; flex-wrap: wrap; justify-content: center; }
+        .card-grid.cols2-centered .card { flex: 0 1 calc(50% - 11px); }
+        @media (max-width: 560px) { .card-grid.cols2-centered .card { flex-basis: 100%; } }
+        .card { background: linear-gradient(145deg, #ffffff, var(--light)); border-radius: 14px; padding: 22px 24px; box-shadow: 0 4px 18px rgba(16,27,61,0.08); border-left: 5px solid var(--rentasim); position: relative; overflow: hidden; }
+        .card.bd-teal { border-left-color: var(--rentasim); }
+        .card.bd-green { border-left-color: var(--accent-green); }
+        .card.bd-amber { border-left-color: var(--accent-amber); }
+        .card.bd-purple { border-left-color: var(--accent-purple); }
+        .card.bd-red { border-left-color: var(--accent-red); }
+        .card-icon { font-size: 1.6em; margin-bottom: 10px; }
+        .card h3 { font-family: 'Fraunces', serif; font-size: 1.06em; color: var(--dark); margin-bottom: 8px; font-weight: 600; }
+        .card p { color: #667; line-height: 1.6; font-size: 0.77em; }
+        .card ul.mini { list-style:none; padding:0; margin-top:4px; }
+        .card ul.mini li { font-size:0.77em; color:#556; line-height:1.5; padding-left:14px; position:relative; }
+        .card ul.mini li::before { content:'·'; position:absolute; left:0; color:var(--rentasim); font-weight:800; }
+
+        /* ===== TABLE ===== */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 18px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 18px rgba(16,27,61,0.08); }
+        .data-table.compact td { padding: 11px 16px; font-size: 0.77em; }
+        .data-table.compact th { padding: 11px 16px; font-size: 0.7em; }
+        .data-table thead { background: var(--rentasim-dark); color: var(--white); }
+        .data-table th { padding: 14px 18px; text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.76em; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { padding: 12px 18px; border-bottom: 1px solid var(--gray-light); font-size: 0.77em; color: #333; }
+        .data-table tbody tr:hover { background: #EEF3FD; }
+        .data-table tbody tr:nth-child(even) { background: #FAFBFE; }
+
+        /* ===== BADGES ===== */
+        .badge { display: inline-block; padding: 4px 11px; border-radius: 20px; font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin: 2px; }
+        .badge-blue { background: #DCE6FB; color: var(--primary-mid); }
+        .badge-teal { background: #D3E6E5; color: var(--rentasim-dark); }
+        .badge-green { background: #D8F1E0; color: #15803D; }
+        .badge-amber { background: #FBE8CE; color: #9A5B0C; }
+        .badge-red { background: #FBD9D9; color: #A62626; }
+        .badge-purple { background: #E4E0F7; color: #4E3FA0; }
+        .badge-gray { background: var(--gray-light); color: var(--gray); }
+
+        /* ===== ACCORDION / FACTOR ===== */
+        .factor-accordion { margin: 18px 0; }
+        .factor-item { margin-bottom: 10px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(16,27,61,0.08); }
+        .factor-header { padding: 14px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.94em; color: var(--white); }
+        .factor-header .factor-tag { background: rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 20px; font-size: 0.72em; font-weight: 800; white-space: nowrap; }
+        .factor-header .factor-icon { font-size: 1.1em; transition: transform 0.3s ease; margin-left: auto; }
+        .factor-item.active .factor-header .factor-icon { transform: rotate(180deg); }
+        .factor-blue   { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+        .factor-teal   { background: linear-gradient(135deg, var(--rentasim), var(--rentasim-dark)); }
+        .factor-green  { background: linear-gradient(135deg, #22B25B, #15803D); }
+        .factor-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; background: var(--white); }
+        .factor-item.active .factor-body { max-height: 400px; }
+        .factor-content { padding: 18px 22px; color: #555; line-height: 1.7; font-size: 0.92em; }
+        .factor-content strong { color: var(--dark); }
+
+        /* ===== TWO / THREE COLUMN ===== */
+        .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 34px; margin-top: 22px; align-items: start; }
+        .two-col.even { grid-template-columns: 1fr 1fr; }
+        .three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; margin-top: 22px; }
+        @media (max-width: 900px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+        .steps-list { list-style: none; padding: 0; counter-reset: st; }
+        .steps-list.compact li { padding: 7px 0 7px 34px; font-size: 0.77em; }
+        .steps-list li { counter-increment: st; position: relative; padding: 11px 0 11px 40px; font-size: 0.77em; color: #3a4250; line-height: 1.55; border-bottom: 1px solid var(--gray-light); }
+        .steps-list li:last-child { border-bottom: none; }
+        .steps-list li::before { content: counter(st); position: absolute; left: 0; top: 7px; width: 24px; height: 24px; border-radius: 50%; background: var(--rentasim); color: #fff; font-family: 'Inter'; font-weight: 800; font-size: 0.72em; display: flex; align-items: center; justify-content: center; }
+        .steps-list.even-gap li { min-height: 64px; display: flex; align-items: center; }
+        .steps-list.even-gap li::before { top: 50%; transform: translateY(-50%); }
+
+        .bullet-list { list-style: none; padding: 0; }
+        .bullet-list li { position: relative; padding: 7px 0 7px 20px; font-size: 0.77em; color: #3a4250; line-height: 1.58; }
+        .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--rentasim); font-weight: 700; }
+
+        .callout { background: var(--light); border-left: 4px solid var(--rentasim); border-radius: 10px; padding: 18px 22px; }
+        .callout.warn { border-left-color: var(--accent-red); }
+        .callout.blue { border-left-color: var(--primary); }
+        .callout h4 { font-family: 'Fraunces', serif; font-weight: 600; color: var(--rentasim-dark); font-size: 1em; margin-bottom: 7px; }
+        .callout.warn h4 { color: var(--accent-red); }
+        .callout.blue h4 { color: var(--primary-mid); }
+        .callout p { color: #4A5568; line-height: 1.62; font-size: 0.77em; margin-bottom: 9px; }
+        .callout p:last-child { margin-bottom: 0; }
+        .callout .quote { font-style: italic; color: var(--dark); background: #fff; border-radius: 8px; padding: 10px 14px; border: 1px dashed var(--gray-light); }
+
+        /* ===== STAT ROW ===== */
+        .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+        .stat-row.cols3 { grid-template-columns: repeat(3, 1fr); }
+        .stat-row.cols4 { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 900px) { .stat-row.cols3, .stat-row.cols4 { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 560px) { .stat-row { grid-template-columns: 1fr; } }
+        .stat { background: linear-gradient(145deg, #ffffff, var(--light)); border-radius: 12px; padding: 16px 19px; box-shadow: 0 4px 18px rgba(16,27,61,0.08); border-left: 5px solid var(--rentasim); }
+        .stat.b-blue { border-left-color: var(--primary); }
+        .stat.b-green { border-left-color: var(--accent-green); }
+        .stat.b-amber { border-left-color: var(--accent-amber); }
+        .stat.b-red { border-left-color: var(--accent-red); }
+        .stat.b-purple { border-left-color: var(--accent-purple); }
+        .stat.b-purple .st-n { color: #4E3FA0; }
+        .stat .st-n { display: block; font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.22em; color: var(--rentasim-dark); }
+        .stat.b-blue .st-n { color: var(--primary-mid); }
+        .stat.b-green .st-n { color: #15803D; }
+        .stat.b-amber .st-n { color: #9A5B0C; }
+        .stat.b-red .st-n { color: #A62626; }
+        .stat .st-l { display: block; margin-top: 4px; color: #667; font-size: 0.77em; line-height: 1.3; }
+
+        /* ===== JOURNEY / STEPPER ===== */
+        .journey { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 16px; }
+        .j-step { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.74em; padding: 7px 13px; border-radius: 20px; background: var(--gray-light); color: var(--gray); white-space: nowrap; }
+        .j-step.done { background: #D3E6E5; color: var(--rentasim-dark); }
+        .j-step.active { background: var(--rentasim-dark); color: #fff; box-shadow: 0 4px 14px rgba(45,109,102,0.35); }
+        .j-arrow { color: var(--gray-light); font-size: 0.78em; }
+
+        /* ===== TIMELINE OVERVIEW ===== */
+        .timeline-ov { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; margin-top: 28px; flex-wrap: wrap; }
+        .tov-node { flex: 1; min-width: 100px; text-align: center; }
+        .tov-dot { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--rentasim-dark), var(--rentasim-deep)); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 7px; font-family: 'Fraunces'; font-weight: 700; font-size: 0.9em; box-shadow: 0 4px 14px rgba(45,109,102,0.3); }
+        .tov-node.accent .tov-dot { background: linear-gradient(135deg, var(--rentasim), var(--rentasim-dark)); box-shadow: 0 4px 14px rgba(74,150,142,0.35); }
+        .tov-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78em; color: var(--dark); }
+        .tov-dur { font-size: 0.7em; color: var(--gray); margin-top: 2px; }
+        .tov-arrow { color: var(--gray-light); font-size: 1.2em; padding-top: 10px; }
+        @media (max-width: 900px) { .timeline-ov { flex-direction: column; align-items: stretch; } .tov-arrow { display:none; } }
+
+        /* ===== RESERVED / SALVEDADES ===== */
+        .reserved-item { display: flex; gap: 14px; align-items: flex-start; background: var(--light); border-radius: 10px; padding: 15px 20px; border-left: 4px solid var(--accent-amber); margin-bottom: 12px; }
+        .reserved-item .ri-icon { font-size: 1.1em; flex-shrink: 0; }
+        .reserved-item strong { color: var(--dark); font-size:0.92em; }
+        .reserved-item p { color: #556; line-height: 1.5; font-size: 0.77em; margin: 2px 0 0; }
+
+        /* ===== HERO (PORTADA) ===== */
+        .hero { text-align: center; padding: 64px 40px; background: linear-gradient(135deg, var(--rentasim) 0%, var(--rentasim-dark) 65%, var(--rentasim-deep) 100%); color: var(--white); position: relative; overflow: hidden; }
+        .hero h1 { font-family: 'Fraunces', serif; font-size: 3.8em; font-weight: 800; margin-bottom: 4px; text-shadow: 2px 2px 8px rgba(0,0,0,0.2); }
+        .hero .subtitle { font-family: 'Fraunces', serif; font-size: 1.4em; font-style: italic; font-weight: 500; opacity: 0.95; margin-bottom: 10px; color: #ffffff; text-shadow: 1px 1px 6px rgba(0,0,0,0.25); }
+        .hero .guide-tag { font-family: 'Inter'; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.82em; opacity: 0.8; margin-bottom: 22px; }
+        .hero .hero-context { max-width: 740px; margin: 0 auto 24px; font-size: 0.87em; line-height: 1.7; opacity: 0.95; }
+        .hero-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 42px; }
+        .hero-badge { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); backdrop-filter: blur(10px); padding: 9px 20px; border-radius: 30px; font-weight: 600; font-size: 0.85em; }
+        .hero-brand { margin-top: 56px; display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; font-size: 0.88em; opacity: 0.9; }
+
+        /* ===== CLOSING ===== */
+        .closing { text-align: center; padding: 56px 40px; background: linear-gradient(135deg, var(--rentasim-dark) 0%, var(--rentasim-deep) 100%); color: #fff; min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .closing h1 { font-family: 'Fraunces', serif; font-size: 2.6em; color: #fff; margin-bottom: 10px; font-weight: 700; }
+        .closing p.msg { color: rgba(255,255,255,0.9); font-size: 1.02em; max-width: 680px; margin: 0 auto 8px; line-height: 1.6; }
+        .closing .thanks-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1em; opacity: 0.92; margin-bottom: 26px; color: var(--rentasim-light); }
+        .glass-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; margin: 8px auto 26px; width: 100%; }
+        @media (max-width: 800px) { .glass-row { grid-template-columns: 1fr; } }
+        .glass-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px; padding: 18px 22px; text-align: left; }
+        .glass-card h4 { font-family: 'Fraunces', serif; color: var(--rentasim-light); margin-bottom: 8px; font-size: 0.98em; }
+        .glass-card ul { list-style: none; padding: 0; }
+        .glass-card li { padding: 4px 0 4px 16px; position: relative; font-size: 0.77em; color: rgba(255,255,255,0.85); line-height: 1.4; }
+        .glass-card li::before { content: '•'; position: absolute; left: 0; color: var(--rentasim-light); }
+        .contact-box { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 22px 42px; margin: 4px auto 24px; backdrop-filter: blur(6px); }
+        .contact-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.76em; letter-spacing: 1.4px; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
+        .contact-line { font-size: 1em; margin: 6px 0; display: flex; align-items: center; gap: 10px; justify-content: center; }
+        .contact-line a { color: #fff; text-decoration: none; }
+        .contact-line a:hover { text-decoration: underline; }
+        .contact-line .wa-icon { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+        .contact-sep { height: 1px; background: rgba(255,255,255,0.18); margin: 14px 0; }
+        .brand-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 9px 22px; border-radius: 30px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85em; }
+
+        /* ===== INTRO OVERLAY ===== */
+        .intro-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, var(--rentasim-dark) 0%, var(--rentasim) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .intro-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .intro-overlay h1 { font-family: 'Fraunces', serif; font-size: 3.6em; color: var(--white); font-weight: 800; margin-bottom: 8px; text-align: center; }
+        .intro-overlay .intro-sub { color: rgba(255,255,255,0.85); font-size: 1.15em; margin-bottom: 6px; text-align: center; padding: 0 20px; font-style: italic; font-family: 'Fraunces', serif; }
+        .intro-overlay .intro-tag { color: rgba(255,255,255,0.6); font-size: 0.85em; margin-bottom: 34px; text-align: center; font-family:'Inter'; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+        .start-btn { background: var(--white); color: var(--rentasim-dark); border: none; padding: 17px 46px; border-radius: 40px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .start-btn:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.35); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--rentasim-light); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--rentasim); }
+
+        @media (max-width: 768px) {
+            .slide-header h1 { font-size: 1.4em; }
+            .hero h1 { font-size: 2.2em; }
+            .slide-content { padding: 24px 20px; }
+        }
+
+        /* ===== IMAGEN AMPLIABLE ===== */
+        img.zoomable { cursor: zoom-in; transition: transform 0.2s ease; }
+        img.zoomable:hover { transform: scale(1.02); }
+        .zoom-hint { display: block; text-align: center; font-size: 0.7em; color: var(--gray); margin-top: 8px; }
+        .lightbox { position: fixed; inset: 0; background: rgba(10,18,40,0.88); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 24px; cursor: zoom-out; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 92vh; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .lightbox-close { position: absolute; top: 16px; right: 22px; color: #fff; font-size: 2em; line-height: 1; background: none; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<!-- ===================== INTRO OVERLAY ===================== -->
+<div class="intro-overlay" id="introOverlay">
+    <div class="brand-lockup on-dark" style="font-size:1.6em; margin-bottom:22px;">
+        <span class="bl-praxi">praxi</span><span class="bl-lab">lab</span><span class="bl-sep"></span><span class="bl-mod">rentasim</span>
+    </div>
+    <h1>RentaSim</h1>
+    <p class="intro-sub">Del balance a la declaración.</p>
+    <p class="intro-tag">Presentación para docentes</p>
+    <button class="start-btn" onclick="startPresentation()">▶ INICIAR PRESENTACIÓN</button>
+</div>
+
+<div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+<div class="presentation-container">
+
+    <!-- ===================== SLIDE 1: PORTADA ===================== -->
+    <div class="slide active" id="slide1">
+        <div class="hero" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="brand-lockup on-dark" style="font-size:1.2em; margin-bottom:24px;">
+                <span class="bl-praxi">praxi</span><span class="bl-lab">lab</span><span class="bl-sep"></span><span class="bl-mod">rentasim</span>
+            </div>
+            <h1>RentaSim</h1>
+            <p class="subtitle">Del balance a la declaración</p>
+            <div class="hero-badges">
+                <span class="hero-badge">🧾 Conciliación fiscal y declaración de renta</span>
+                <span class="hero-badge">👤 Individual</span>
+                <span class="hero-badge">⏱️ 15–20 h</span>
+                <span class="hero-badge">📅 Año gravable 2025</span>
+                <span class="hero-badge">🎓 Contaduría Pública</span>
+            </div>
+            <div class="hero-brand">
+                <span>Un simulador de PraxiLab</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: RENTASIM EN GENERAL ===================== -->
+    <div class="slide" id="slideRentaSim">
+        <div class="slide-header">
+            <span class="block-tag">El simulador</span>
+            <h1>🧾 RentaSim</h1>
+            <h2>Un simulador de conciliación fiscal y declaración de renta</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <p class="lead">RentaSim es el simulador de PraxiLab que lleva al aula el trabajo real de una firma de asesoría tributaria. A partir del expediente de un cliente —estados financieros bajo NIIF, notas y soportes—, el estudiante identifica las diferencias entre la contabilidad y lo fiscal, las clasifica, las sustenta frente al <strong>Estatuto Tributario</strong> y llega hasta la <strong>declaración de renta</strong>. Un motor determinista evalúa cada decisión y cada estudiante resuelve una variante distinta del caso.</p>
+
+            <div class="card-grid cols4">
+                <div class="card bd-teal"><div class="card-icon">🎓</div><h3>Para quién</h3><p>Pregrado en Contaduría Pública. Cursos de tributaria.</p></div>
+                <div class="card"><div class="card-icon">👤</div><h3>Modalidad</h3><p>Individual. Cada estudiante trabaja su propio encargo.</p></div>
+                <div class="card bd-amber"><div class="card-icon">⏱️</div><h3>Esfuerzo</h3><p>15 a 20 horas de trabajo autónomo, en varias sesiones.</p></div>
+                <div class="card bd-purple"><div class="card-icon">📐</div><h3>Referente</h3><p>Año gravable 2025 y Estatuto Tributario vigente al firmar.</p></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 2: QUÉ ES RENTASIM ===================== -->
+    <div class="slide" id="slide2">
+        <div class="slide-header">
+            <span class="block-tag">PraxiLab y RentaSim</span>
+            <h1>🧾 ¿Qué va a hacer el estudiante?</h1>
+            <h2>Su rol en la firma, y lo que produce en cada etapa del encargo</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <p class="lead">El estudiante deja de ser alumno y entra a trabajar como <strong>analista junior de una firma de asesoría tributaria</strong>, en plena temporada de cierre. La socia le asigna un cliente: recibe estados financieros bajo NIIF, notas y un expediente documental, y debe producir la <strong>conciliación fiscal</strong> y la <strong>declaración de renta</strong>, sustentando cada ajuste como lo haría ante un revisor real.</p>
+
+            <div class="stat-row cols3">
+                <div class="stat"><span class="st-n">👤 Su rol</span><span class="st-l">Analista junior: lee, decide, calcula y firma. Cada decisión es suya y queda registrada.</span></div>
+                <div class="stat b-purple"><span class="st-n">🗣️ Quién lo guía</span><span class="st-l">La socia de la firma: orienta con preguntas y revisa su trabajo, pero nunca le da la respuesta.</span></div>
+                <div class="stat b-blue"><span class="st-n">🏢 Para quién trabaja</span><span class="st-l">Un cliente que responde (o no) a sus pedidos de soportes, y un gerente que no es tributarista.</span></div>
+            </div>
+
+            <p class="lead" style="margin-top:20px;">El encargo avanza en cuatro actos, y cada uno le exige un producto concreto:</p>
+
+            <div class="card-grid cols4">
+                <div class="card bd-teal"><div class="card-icon">📂</div><h3>1 · Revisa el expediente</h3><p>Lee cada partida con ojo crítico, marca las sospechosas, pide los soportes que faltan y entrega un <strong>memorando de riesgos</strong>.</p></div>
+                <div class="card"><div class="card-icon">🧮</div><h3>2 · Clasifica y sustenta</h3><p>En cada partida decide el <strong>monto</strong>, el <strong>tipo</strong> de diferencia y la <strong>norma</strong> que la respalda, y declara su confianza.</p></div>
+                <div class="card bd-amber"><div class="card-icon">➗</div><h3>3 · Liquida la renta</h3><p>Parte de la utilidad contable, suma sus ajustes y calcula él mismo la <strong>renta líquida gravable</strong>: el sistema no le da el total.</p></div>
+                <div class="card bd-purple"><div class="card-icon">✉️</div><h3>4 · Explica y sella</h3><p>Escribe una <strong>carta al gerente</strong> en lenguaje de negocio y sella la declaración, un paso irreversible.</p></div>
+            </div>
+
+            <div class="callout" style="margin-top:22px;">
+                <h4>🎯 Lo que se lleva</h4>
+                <p>Al cierre ve cuántas de sus decisiones eran correctas y por qué: la experiencia de su primer encargo en una firma, sin el costo de equivocarse con un cliente real.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 4: CÓMO FUNCIONA (I) — TRES CASOS ===================== -->
+    <div class="slide" id="slide4">
+        <div class="slide-header">
+            <span class="block-tag">La lógica del simulador</span>
+            <h1>🎲 Tres casos, un motor determinista</h1>
+            <h2>El docente elige un caso; cada uno enseña algo distinto</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <table class="data-table">
+                <thead><tr><th>Caso</th><th>Empresa</th><th>Utilidad → renta</th><th>Lo que enseña</th><th style="text-align:center;">Estado</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>A</strong></td><td>Manufactura pyme</td><td>$850 M → $1.030 M</td><td>12 diferencias clásicas del cierre, todas suman, + 4 señuelos (16 partidas)</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
+                    <tr><td><strong>B</strong></td><td>Servicios de TI</td><td>$700 M → $850 M</td><td>Los signos importan: aparecen las primeras deducciones</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
+                    <tr><td><strong>C</strong></td><td>Agroindustria</td><td>$520 M → $625 M</td><td>Juicio bajo ambigüedad: 4 de 12 partidas son de criterio</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
+                </tbody>
+            </table>
+            <p class="lead" style="margin-top:16px;">Los casos B y C tienen <strong>12 partidas</strong> cada uno; el caso A suma <strong>16</strong> — sus 12 ajustes reales más 4 señuelos. Ninguno asume haber cursado otro. El caso se puede fijar para todo el recurso o repartir <strong>por estudiante</strong> en PraxiLab.</p>
+
+            <div class="card-grid cols3">
+                <div class="card bd-green">
+                    <h3>Caso A · Manufactura pyme</h3>
+                    <p>El caso base: una pyme manufacturera cierra el año con una utilidad contable de $850 M. Su expediente reúne <strong>16 partidas</strong>: 12 ajustes clásicos de un primer curso tributario —depreciaciones, provisiones, multas— que todas suman a la renta líquida, más 4 señuelos: partidas que parecen sospechosas pero no requieren ajuste, para entrenar el criterio del estudiante desde el Acto I.</p>
+                </div>
+                <div class="card bd-green">
+                    <h3>Caso B · Servicios de TI</h3>
+                    <p>Una empresa de servicios de TI, con una utilidad contable de $700 M. Aquí los signos empiezan a importar: no todos los ajustes suman, aparecen las primeras deducciones que restan de la renta líquida. Exige prestar atención a la dirección de cada ajuste, no solo a su existencia.</p>
+                </div>
+                <div class="card bd-green">
+                    <h3>Caso C · Agroindustria</h3>
+                    <p>Una agroindustria con utilidad contable de $520 M, el caso más exigente de los tres. Cuatro de sus doce partidas son de criterio: no tienen una única respuesta correcta y ponen a prueba el juicio profesional del estudiante bajo ambigüedad real, como ocurriría en una firma.</p>
+                </div>
+            </div>
+
+            <div class="factor-accordion">
+                <div class="factor-item active">
+                    <div class="factor-header factor-teal" onclick="toggleFactor(this)"><span>💡 ¿Qué caso le asigno a mi grupo?</span><span class="factor-icon">▼</span></div>
+                    <div class="factor-body"><div class="factor-content" style="font-size:0.87em;">
+                        <strong>Primer espacio tributario</strong> → Caso A · <strong>Ya vio renta, NIIF sólida</strong> → Caso B · <strong>Segundo curso tributario o Consultorio</strong> → Caso C · <strong>Grupo heterogéneo</strong> → A a la mayoría, C a los avanzados.
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 16: CÓMO PROGRAMA EL DOCENTE ===================== -->
+    <div class="slide" id="slide16">
+        <div class="slide-header">
+            <span class="block-tag">Cómo programa el docente</span>
+            <h1>🪜 Cómo programa el docente el encargo</h1>
+            <h2>Paso a paso, y los cuatro interruptores que lo configuran</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="two-col">
+                <div>
+                    <h3 class="sub-h">Paso a paso</h3>
+                    <ol class="steps-list compact">
+                        <li><strong>Abrir el curso</strong> — en PraxiLab, con rol docente.</li>
+                        <li><strong>Anclar RentaSim</strong> — como recurso, con su peso en la nota.</li>
+                        <li><strong>Configurar el encargo</strong> — caso, apoyo y segunda oportunidad.</li>
+                        <li><strong>Repartir casos</strong> — opcional, antes de que firmen.</li>
+                        <li><strong>Presentar en aula</strong> — briefing y fecha de cierre.</li>
+                        <li><strong>Seguir la cohorte</strong> — consola docente del recurso.</li>
+                    </ol>
+                </div>
+                <div>
+                    <h3 class="sub-h teal">Los cuatro interruptores</h3>
+                    <table class="data-table compact">
+                        <thead><tr><th>Interruptor</th><th>Rango</th><th>Por defecto</th></tr></thead>
+                        <tbody>
+                            <tr><td>Caso asignado</td><td>A, B, C o por estudiante</td><td>A</td></tr>
+                            <tr><td>Ventana de corrección</td><td>Activa/inactiva + %</td><td>Activa, 80 %</td></tr>
+                            <tr><td>Revisiones de la socia</td><td>0, 1 o 2</td><td>1</td></tr>
+                            <tr><td>Presupuesto de consultas</td><td>0 a 8</td><td>5</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size:0.77em;color:#667;margin-top:8px;">El caso se congela al entrar el primer estudiante; las consultas se pueden subir en marcha.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: CÓMO VA A SER EVALUADO ===================== -->
+    <div class="slide" id="slide3">
+        <div class="slide-header">
+            <span class="block-tag">Evaluación del estudiante</span>
+            <h1>📊 ¿Cómo va a ser evaluado?</h1>
+            <h2>Cuatro frentes, cada uno con su peso en la nota final</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <table class="data-table compact">
+                <thead><tr><th>El estudiante…</th><th>Evidencia</th><th style="text-align:center;">Peso</th></tr></thead>
+                <tbody>
+                    <tr><td>Clasifica las diferencias como permanentes o temporarias</td><td>Tipo elegido en cada partida</td><td style="text-align:center;">25 %</td></tr>
+                    <tr><td>Sustenta cada ajuste con el fundamento normativo</td><td>Norma elegida + memorando</td><td style="text-align:center;">25 %</td></tr>
+                    <tr><td>Elabora la conciliación y liquida hasta renta líquida</td><td>Conciliación del Acto III</td><td style="text-align:center;">35 %</td></tr>
+                    <tr><td>Evalúa la exposición fiscal y la comunica a un no experto</td><td>Carta al gerente</td><td style="text-align:center;">15 %</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub-h" style="margin-top:24px;">Qué mide cada frente</h3>
+            <div class="card-grid cols4">
+                <div class="card bd-teal"><div class="card-icon">🏷️</div><h3>Clasificación · 25 %</h3><p><strong>Qué mira:</strong> si cada partida es permanente, temporaria o sin efecto, incluidos los señuelos.</p><p><strong>Demuestra:</strong> que entiende la naturaleza de cada diferencia, no solo que existe.</p></div>
+                <div class="card"><div class="card-icon">📜</div><h3>Fundamento · 25 %</h3><p><strong>Qué mira:</strong> la norma elegida del catálogo para cada ajuste y el memorando de riesgos.</p><p><strong>Demuestra:</strong> que puede defender cada ajuste frente al Estatuto Tributario.</p></div>
+                <div class="card bd-amber"><div class="card-icon">➗</div><h3>Conciliación · 35 %</h3><p><strong>Qué mira:</strong> que llegue de la utilidad contable a la renta líquida con los montos y signos correctos.</p><p><strong>Demuestra:</strong> dominio técnico del cálculo; por eso es el frente de mayor peso.</p></div>
+                <div class="card bd-purple"><div class="card-icon">✉️</div><h3>Gestión del riesgo · 15 %</h3><p><strong>Qué mira:</strong> la carta al gerente, calificada con rúbrica: posiciones sólidas, riesgosas y recomendaciones.</p><p><strong>Demuestra:</strong> que sabe comunicar la exposición fiscal a quien no es experto.</p></div>
+            </div>
+
+            <div class="callout blue" style="margin-top:22px;">
+                <h4>⚖️ Quién califica qué</h4>
+                <p>Cifras, tipos y normas se evalúan con un <strong>motor determinista</strong> contra un catálogo: la misma respuesta siempre recibe la misma nota. La IA solo lee los textos libres y aporta el <strong>15 %</strong> de gestión del riesgo a partir de la carta, con rúbrica y sin decidir cifras ni normas.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: POR QUÉ RENTASIM ===================== -->
+    <div class="slide" id="slideBeneficios">
+        <div class="slide-header">
+            <span class="block-tag">Por qué RentaSim</span>
+            <h1>✅ Por qué elegir RentaSim</h1>
+            <h2>Tres razones para llevarlo a un curso de tributaria</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="card-grid cols3">
+                <div class="card"><div class="card-icon">🧠</div><h3>Evalúa juicio, no memoria</h3><p>El mismo tipo de criterio que mide <strong>Saber Pro</strong> en Información y Control Contable: sustentar un ajuste, no repetir una definición.</p></div>
+                <div class="card bd-amber"><div class="card-icon">🔁</div><h3>Imposible de copiar</h3><p>Cada estudiante resuelve una variante distinta, generada por semilla: mismas cifras nunca, mismo rigor siempre.</p></div>
+                <div class="card bd-purple"><div class="card-icon">📋</div><h3>Trazable y auditable</h3><p>Cada ajuste queda sustentado con norma y monto. El docente puede revisar el porqué de cada nota, no solo el número.</p></div>
+            </div>
+            <div class="callout blue" style="margin-top:22px;">
+                <h4>🎓 En una frase</h4>
+                <p>El estudiante recibe el expediente de un cliente real y debe defender su declaración de renta ante una socia — igual que en su primer año de firma.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SEPARADOR: ¿CÓMO INGRESAR AL SIMULADOR? ===================== -->
+    <div class="slide" id="slideSepIngreso">
+        <div class="hero" style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <h1 style="font-size:2.8em;">🚪 ¿Cómo ingresar al simulador?</h1>
+            <p class="subtitle">De PraxiLab a la primera sesión</p>
+            <div class="slide-number"></div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: CÓMO ENTRA ===================== -->
+    <div class="slide" id="slideComoEntra">
+        <div class="slide-header">
+            <span class="block-tag">Acceso del estudiante</span>
+            <h1>🚪 Cómo entrar</h1>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="two-col even" style="align-items:center;">
+                <div style="display:flex; align-items:center; justify-content:center;">
+                    <img src="assets/login-praxilab.png" alt="Pantalla de inicio de sesión de PraxiLab" style="max-width:72%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
+                </div>
+                <div>
+                    <ol class="steps-list even-gap">
+                        <li><span>Entra a su curso en <strong>PraxiLab</strong>,<br>con su usuario de la universidad.</span></li>
+                        <li><span>Abre el recurso <strong>RentaSim</strong>.</span></li>
+                        <li><span>Lee la bienvenida: quién es, qué va a hacer,<br>con qué reglas.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SEPARADOR: FASES DEL SIMULADOR ===================== -->
+    <div class="slide" id="slideSepFases">
+        <div class="hero" style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <h1 style="font-size:2.8em;">Fases del simulador</h1>
+            <p class="subtitle">Cuatro actos, de la recepción del expediente al sellado</p>
+            <div class="slide-number"></div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 7: ACTO I RECEPCIÓN ===================== -->
+    <div class="slide" id="slide8">
+        <div class="slide-header">
+            <h1>📂 Acto I · Recepción</h1>
+            <h2>4 horas · leer el expediente con ojo crítico</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="journey">
+                <span class="j-step done">Inicio</span><span class="j-arrow">➜</span>
+                <span class="j-step active">Acto I · Recepción</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto II</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto III</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto IV</span><span class="j-arrow">➜</span>
+                <span class="j-step">Cierre</span>
+            </div>
+            <div class="two-col">
+                <div>
+                    <h3 class="sub-h">Qué hace el estudiante</h3>
+                    <ol class="steps-list">
+                        <li>Revisa cada partida del expediente con su magnitud documental.</li>
+                        <li>Marca las que le parecen sospechosas — mínimo 6.</li>
+                        <li>Pide soportes faltantes; el cliente responde en la sesión siguiente, o no responde.</li>
+                        <li>Entrega un memorando de riesgos de unas 300 palabras.</li>
+                    </ol>
+                </div>
+                <div class="callout">
+                    <h4>🎯 Los señuelos</h4>
+                    <p>No todas requieren ajuste: el caso A trae 4 partidas sanas. Al cierre ve cuántas de sus marcas eran hallazgos reales.</p>
+                    <p><strong>Puerta de avance:</strong> no pasa al Acto II sin las 6 marcas y el memorando.</p>
+                </div>
+            </div>
+            <div class="stat-row cols3">
+                <div class="stat b-blue"><span class="st-n">12 a 16 partidas</span><span class="st-l">Componen el expediente del cliente, según el caso.</span></div>
+                <div class="stat"><span class="st-n">≥ 6 marcadas</span><span class="st-l">Mínimo de partidas sospechosas para avanzar.</span></div>
+                <div class="stat b-amber"><span class="st-n">~300 palabras</span><span class="st-l">Extensión del memorando de riesgos.</span></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: ACTO I — MEMORANDO DE RIESGOS ===================== -->
+    <div class="slide" id="slideMemorando">
+        <div class="slide-header">
+            <h1>📝 Acto I · El memorando de riesgos</h1>
+            <h2>El primer entregable escrito: el diagnóstico inicial del encargo</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="journey">
+                <span class="j-step done">Inicio</span><span class="j-arrow">➜</span>
+                <span class="j-step active">Acto I · Memorando</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto II</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto III</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto IV</span><span class="j-arrow">➜</span>
+                <span class="j-step">Cierre</span>
+            </div>
+            <p class="lead" style="margin-top:16px;">Lo redacta al final del Acto I, después de revisar el expediente y antes de clasificar las partidas. Imita lo que hace un analista junior en una firma real: antes de liquidar, levanta un <strong>diagnóstico inicial</strong> para que la socia sepa dónde está el riesgo del encargo.</p>
+            <div style="margin-top:22px;">
+                <h3 class="sub-h">Qué debe evidenciar</h3>
+                <ol class="steps-list compact">
+                    <li><strong>Partidas sospechosas</strong> — cuáles le preocupan y por qué.</li>
+                    <li><strong>Documentos que faltan</strong> — qué soportes no están en el expediente.</li>
+                    <li><strong>Riesgo frente a la DIAN</strong> — dónde cree que el cliente podría tener problemas.</li>
+                    <li><strong>Lectura crítica</strong> — qué documento del expediente revela cada riesgo.</li>
+                </ol>
+                <p style="font-size:0.77em;color:#667;margin-top:8px;">Aporta al resultado de sustentación normativa (RA-R2) y a la comunicación escrita.</p>
+            </div>
+            <div class="callout blue" style="margin-top:18px;">
+                <p>Es su primera lectura profesional del caso. Al final pueden compararlo con el expediente maestro para ver qué riesgos detectaron a tiempo y cuáles se les pasaron.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 9: ACTO II — DECISIONES + PANTALLA ===================== -->
+    <div class="slide" id="slide9">
+        <div class="slide-header">
+            <h1>🧮 Acto II · Clasificación</h1>
+            <h2>8 horas · cuatro decisiones por partida, así se ven en pantalla</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="journey">
+                <span class="j-step done">Inicio</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto I</span><span class="j-arrow">➜</span>
+                <span class="j-step active">Acto II · Clasificación</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto III</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto IV</span><span class="j-arrow">➜</span>
+                <span class="j-step">Cierre</span>
+            </div>
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h3 class="sub-h">Cuatro campos, por cada partida</h3>
+                    <ol class="steps-list compact">
+                        <li><strong>Monto</strong> — cuánto se ajusta, en pesos.</li>
+                        <li><strong>Tipo</strong> — permanente, temporaria o sin efecto.</li>
+                        <li><strong>Fundamento</strong> — una norma del catálogo, no texto libre.</li>
+                        <li><strong>Confianza</strong> — alta/media/baja; no afecta la nota.</li>
+                    </ol>
+                    <p style="font-size:0.77em;color:#667;margin-top:8px;">Todo se guarda al salir de cada campo. Aquí también puede pedir un soporte que olvidó en el Acto I.</p>
+                </div>
+                <div>
+                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto2-clasificacion.png" alt="Pantalla del Acto II en RentaSim: por cada partida, campos de monto del ajuste, tipo, confianza y fundamento" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
+                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 10: ACTO II — APOYO Y CONTROL ===================== -->
+    <div class="slide" id="slide10">
+        <div class="slide-header">
+            <h1>🗣️ Acto II · el apoyo y el control</h1>
+            <h2>Quién lo orienta, cómo se tratan sus errores, su nivel de riesgo y la revisión de la socia</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="card-grid cols4">
+                <div class="card bd-teal">
+                    <div class="card-icon">🗣️</div><h3>¿Quién lo orienta?</h3>
+                    <ul class="mini">
+                        <li>La socia responde con una pregunta guía o la familia normativa.</li>
+                        <li>Nunca le da la respuesta exacta.</li>
+                        <li>5 consultas por defecto (0 a 8), máx. 2 por partida.</li>
+                    </ul>
+                </div>
+                <div class="card bd-amber">
+                    <div class="card-icon">🛠️</div><h3>¿Qué pasa si se equivoca?</h3>
+                    <ul class="mini">
+                        <li><strong>De forma:</strong> aviso al instante, sin descuento.</li>
+                        <li><strong>De pasos:</strong> no avanza y se le dice qué falta.</li>
+                        <li><strong>De criterio:</strong> solo pistas indirectas para que lo descubra.</li>
+                    </ul>
+                </div>
+                <div class="card bd-red">
+                    <div class="card-icon">🌡️</div><h3>¿Qué tan arriesgada es su declaración?</h3>
+                    <ul class="mini">
+                        <li>Sube si declara menos de lo documentado sin soportes.</li>
+                        <li>Niveles bajo, medio y alto; no revela si acertó.</li>
+                        <li>Al final, una auditoría simulada revisa 3 partidas.</li>
+                    </ul>
+                </div>
+                <div class="card bd-purple">
+                    <div class="card-icon">✅</div><h3>¿Cuándo lo revisa la socia?</h3>
+                    <ul class="mini">
+                        <li>Le dice cuántas partidas fallan, no cuáles.</li>
+                        <li>Así lo obliga a revisar su propio trabajo.</li>
+                        <li>0, 1 o 2 revisiones, según fije el docente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 11: ACTO III LIQUIDACIÓN ===================== -->
+    <div class="slide" id="slide11">
+        <div class="slide-header">
+            <h1>➗ Acto III · Liquidación</h1>
+            <h2>4 horas · utilidad contable + sus ajustes = renta líquida</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="journey">
+                <span class="j-step done">Inicio</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto I</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto II</span><span class="j-arrow">➜</span>
+                <span class="j-step active">Acto III · Liquidación</span><span class="j-arrow">➜</span>
+                <span class="j-step">Acto IV</span><span class="j-arrow">➜</span>
+                <span class="j-step">Cierre</span>
+            </div>
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h3 class="sub-h">Qué hace el estudiante</h3>
+                    <p style="color:#3a4250;line-height:1.65;font-size:0.77em;">Suma la utilidad contable antes de impuestos más cada uno de sus ajustes, partida por partida, hasta llegar a la renta líquida gravable. <strong>El sistema no muestra el total</strong>: liquidar es calcularlo, no copiar un número.</p>
+                    <div class="callout" style="margin-top:16px;">
+                        <h4>✅ Solo valida la aritmética</h4>
+                        <p>Le dice si sus columnas cuadran, no si su renta es la correcta. Eso se sabe al cierre, con la auditoría simulada.</p>
+                    </div>
+                </div>
+                <div>
+                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto3-liquidacion.png" alt="Pantalla del Acto III en RentaSim: utilidad contable, ajustes y campo para declarar la renta líquida gravable" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
+                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
+                </div>
+            </div>
+            <div class="stat-row cols3">
+                <div class="stat b-blue"><span class="st-n">$850 M</span><span class="st-l">Utilidad contable antes de impuestos (caso A).</span></div>
+                <div class="stat b-amber"><span class="st-n">+ Ajustes del Acto II</span><span class="st-l">Cada uno con su propio signo y monto.</span></div>
+                <div class="stat"><span class="st-n">= $1.030 M</span><span class="st-l">Renta líquida gravable, si liquida bien.</span></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 12: ACTO IV SUSTENTACIÓN ===================== -->
+    <div class="slide" id="slide12">
+        <div class="slide-header">
+            <h1>✉️ Acto IV · Sustentación</h1>
+            <h2>4 horas · la carta al gerente y el sellado de la declaración</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="journey">
+                <span class="j-step done">Inicio</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto I</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto II</span><span class="j-arrow">➜</span>
+                <span class="j-step done">Acto III</span><span class="j-arrow">➜</span>
+                <span class="j-step active">Acto IV · Sustentación</span><span class="j-arrow">➜</span>
+                <span class="j-step">Cierre</span>
+            </div>
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h3 class="sub-h">La carta</h3>
+                    <p style="color:#3a4250;line-height:1.65;font-size:0.77em;">En lenguaje de negocio, para un gerente que no es tributarista: por qué pagará lo que pagará, qué posiciones son sólidas, cuáles riesgosas, y qué hacer distinto el año entrante.</p>
+                    <div class="callout" style="margin-top:16px;">
+                        <h4>🔒 El sellado</h4>
+                        <p>El estudiante confirma que entiende que es <strong>irreversible</strong> y sella. Se congela el estado y se archiva una copia inalterable.</p>
+                        <p>La IA lee la carta y aporta la dimensión de <strong>gestión del riesgo (15 %)</strong>, con rúbrica, sin decidir cifras ni normas.</p>
+                    </div>
+                </div>
+                <div>
+                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto4-carta.png" alt="Pantalla del Acto IV en RentaSim: recuadro para escribir la carta al gerente y botón para sellar la declaración" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
+                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat b-purple"><span class="st-n">15 %</span><span class="st-l">De la nota final: la carta y su gestión del riesgo.</span></div>
+                <div class="stat b-red"><span class="st-n">Irreversible</span><span class="st-l">El sellado se archiva como copia inalterable.</span></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ===================== SLIDE 14: AL CERRAR EL ENCARGO — RETROALIMENTACIÓN ===================== -->
+    <div class="slide" id="slide14">
+        <div class="slide-header">
+            <h1>🎓 Lo que aprende el estudiante</h1>
+            <h2>Al cerrar el encargo: la retroalimentación que consolida su aprendizaje</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <div class="card-grid cols2-centered">
+                <div class="card"><div class="card-icon">🌱</div><h3>En qué necesita reforzar</h3><p>Los fallos de una misma familia normativa se agrupan en un solo vacío conceptual, no en una lista de errores sueltos.</p></div>
+                <div class="card bd-purple"><div class="card-icon">🗂️</div><h3>Cuál era el tratamiento correcto</h3><p>Cada partida con su ajuste correcto y una nota didáctica que explica el porqué.</p></div>
+                <div class="card"><div class="card-icon">👁️</div><h3>Qué tan calibrado está su criterio</h3><p>Cuántas de sus marcas del Acto I eran hallazgos reales y cuántas señuelos: mide su capacidad de discriminar.</p></div>
+                <div class="card bd-teal"><div class="card-icon">📄</div><h3>Cómo se ve un entregable real</h3><p>Conciliación, memorando, carta y expediente, empastados como los entregaría en una firma.</p></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 21: CIERRE — PREGUNTAS Y CONTACTO ===================== -->
+    <div class="slide" id="slide21">
+        <div class="closing">
+            <h1>¡Gracias!</h1>
+            <p class="thanks-sub">RentaSim · un simulador de PraxiLab</p>
+            <div class="brand-lockup on-dark" style="font-size:1.15em; margin-bottom:26px;">
+                <span class="bl-praxi">praxi</span><span class="bl-lab">lab</span><span class="bl-sep"></span><span class="bl-mod">rentasim</span>
+            </div>
+
+            <div class="contact-box">
+                <div class="contact-label">✉️ Escríbanos</div>
+                <div class="contact-line">📧 <a href="mailto:paula@praxilab.app">paula@praxilab.app</a></div>
+                <div class="contact-line"><svg class="wa-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> <a href="https://wa.me/573189756987">318 975 6987</a></div>
+                <div class="contact-sep"></div>
+                <div class="contact-line">📧 <a href="mailto:leisy@praxilab.app">leisy@praxilab.app</a></div>
+                <div class="contact-line"><svg class="wa-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> <a href="https://wa.me/573017903086">301 790 3086</a></div>
+            </div>
+            <div class="brand-pill" style="margin-top:20px;">📘 RentaSim · praxilab.app</div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ===================== NAV BAR ===================== -->
+<div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>◀ Anterior</button>
+    <div class="slide-counter" id="slideCounter">1 / 1</div>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente ▶</button>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    (function numerarSlides() {
+        slides.forEach(function (slide, i) {
+            const el = slide.querySelector('.slide-number');
+            if (el && el.textContent.trim() === '') {
+                el.textContent = String(i + 1).padStart(2, '0');
+            }
+        });
+        document.getElementById('slideCounter').textContent = '1 / ' + totalSlides;
+    })();
+
+    function startPresentation() {
+        document.getElementById('introOverlay').classList.add('hidden');
+        updateSlide();
+    }
+
+    function changeSlide(direction) {
+        const newSlide = currentSlide + direction;
+        if (newSlide >= 1 && newSlide <= totalSlides) {
+            currentSlide = newSlide;
+            updateSlide();
+        }
+    }
+
+    function updateSlide() {
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        slides[currentSlide - 1].classList.add('active');
+
+        document.getElementById('prevBtn').disabled = currentSlide === 1;
+        document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        document.getElementById('nextBtn').innerHTML = currentSlide === totalSlides ? '✓ Finalizar' : 'Siguiente ▶';
+        document.getElementById('slideCounter').textContent = currentSlide + ' / ' + totalSlides;
+
+        const progress = (currentSlide / totalSlides) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleFactor(header) { header.parentElement.classList.toggle('active'); }
+
+    function openLightbox(img) {
+        const lb = document.getElementById('lightbox');
+        const big = document.getElementById('lightboxImg');
+        big.src = img.src;
+        big.alt = img.alt;
+        lb.classList.add('open');
+    }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+    function lightboxOpen() { return document.getElementById('lightbox').classList.contains('open'); }
+
+    document.addEventListener('keydown', function(e) {
+        if (lightboxOpen()) { if (e.key === 'Escape') closeLightbox(); e.preventDefault(); return; }
+        if (document.getElementById('introOverlay').classList.contains('hidden') === false) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+        else if (e.key === 'ArrowLeft') { changeSlide(-1); }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', function(e) {
+        if (lightboxOpen()) return;
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) { changeSlide(diff > 0 ? 1 : -1); }
+    });
+</script>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Cerrar" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="">
+</div>
+
+</body>
+</html>
