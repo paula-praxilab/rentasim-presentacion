@@ -269,6 +269,22 @@
             .slide-content { padding: 24px 20px; }
         }
 
+        /* ===== FLUJOGRAMA ===== */
+        .flow-svg { width: 100%; height: auto; display: block; font-family: 'Inter', sans-serif; }
+        .flow-svg .fl-edge line, .flow-svg .fl-edge path { stroke: #5B6472; stroke-width: 1.6; fill: none; marker-end: url(#flowArrow); }
+        .flow-svg .fl-label rect { fill: var(--rentasim-mist); stroke: var(--rentasim-light); }
+        .flow-svg .fl-label text { font-size: 12px; font-weight: 600; fill: var(--rentasim-dark); text-anchor: middle; }
+        .flow-svg .fl-node rect { fill: var(--light); stroke: #9AA5B5; stroke-width: 1.4; }
+        .flow-svg .fl-node.fase rect { fill: #fff; stroke: var(--rentasim); stroke-width: 2; }
+        .flow-svg .fl-node.socia rect { fill: #F2F0FC; stroke: var(--accent-purple); stroke-width: 2; }
+        .flow-svg .fl-node.cierre rect { fill: var(--rentasim-mist); stroke: var(--rentasim-dark); stroke-width: 2; }
+        .flow-svg .fl-node text { text-anchor: middle; }
+        .flow-svg .fl-node .k { font-size: 11px; font-weight: 800; letter-spacing: 1px; fill: var(--rentasim-dark); }
+        .flow-svg .fl-node .t { font-size: 14px; font-weight: 600; fill: var(--dark); }
+        .flow-svg .fl-node .s { font-size: 11px; fill: var(--gray); }
+        .flow-svg .fl-end rect { fill: var(--dark); }
+        .flow-svg .fl-end text { font-size: 13px; font-weight: 700; fill: #fff; text-anchor: middle; }
+
         /* ===== IMAGEN AMPLIABLE ===== */
         img.zoomable { cursor: zoom-in; transition: transform 0.2s ease; }
         img.zoomable:hover { transform: scale(1.02); }
@@ -335,6 +351,114 @@
                 <div class="card bd-amber"><div class="card-icon">⏱️</div><h3>Esfuerzo</h3><p>15 a 20 horas de trabajo autónomo, en varias sesiones.</p></div>
                 <div class="card bd-purple"><div class="card-icon">📐</div><h3>Referente</h3><p>Año gravable 2025 y Estatuto Tributario vigente al firmar.</p></div>
             </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE: FLUJO DEL ENCARGO ===================== -->
+    <div class="slide" id="slideFlujo">
+        <div class="slide-header">
+            <span class="block-tag">El encargo</span>
+            <h1>🗺️ El recorrido del encargo</h1>
+            <h2>Cómo avanza el estudiante en cada caso, de la asignación a la firma</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <p class="lead">El estudiante recorre este flujo <strong>una vez por caso</strong>: cuando firma y cierra el primero, empieza el segundo. La socia revisa su conciliación y puede devolverla cuantas veces haga falta antes de que pase a la depuración.</p>
+
+            <svg class="flow-svg" viewBox="0 0 1200 460" role="img" aria-label="Flujograma del encargo: ingreso, asignación, fases 1 a 4 con revisión de la socia, firma y cierre, y fin del encargo">
+                <defs>
+                    <marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                        <path d="M0,0 L10,5 L0,10 z" fill="#5B6472"/>
+                    </marker>
+                </defs>
+
+                <!-- Conexiones -->
+                <g class="fl-edge">
+                    <line x1="108" y1="202" x2="130" y2="202"/>
+                    <line x1="278" y1="202" x2="300" y2="202"/>
+                    <line x1="432" y1="202" x2="454" y2="202"/>
+                    <line x1="586" y1="202" x2="684" y2="202"/>
+                    <line x1="816" y1="202" x2="838" y2="202"/>
+                    <line x1="970" y1="202" x2="992" y2="202"/>
+                    <line x1="500" y1="254" x2="500" y2="314"/>
+                    <line x1="560" y1="316" x2="560" y2="256"/>
+                    <path d="M646,348 H751 V256"/>
+                    <path d="M1051,150 V60 H205 V148"/>
+                    <path d="M56,254 V430 H1008 V256"/>
+                    <line x1="1090" y1="254" x2="1090" y2="314"/>
+                </g>
+
+                <!-- Etiquetas de las conexiones -->
+                <g class="fl-label">
+                    <rect x="584" y="170" width="104" height="22" rx="11"/><text x="636" y="185">sin revisiones</text>
+                    <rect x="374" y="274" width="120" height="22" rx="11"/><text x="434" y="289">quedan revisiones</text>
+                    <rect x="566" y="274" width="112" height="22" rx="11"/><text x="622" y="289">vuelve a revisar</text>
+                    <rect x="508" y="49" width="228" height="22" rx="11"/><text x="622" y="64">cerró el caso 1: empieza el caso 2</text>
+                    <rect x="480" y="419" width="84" height="22" rx="11"/><text x="522" y="434">ya terminó</text>
+                    <rect x="1022" y="274" width="136" height="22" rx="11"/><text x="1090" y="289">cerró el último caso</text>
+                </g>
+
+                <!-- Nodos -->
+                <g class="fl-node">
+                    <rect x="4" y="150" width="104" height="104" rx="12"/>
+                    <text x="56" y="197" class="t">Ingreso</text>
+                    <text x="56" y="218" class="s">Desde el curso</text>
+                </g>
+                <g class="fl-node">
+                    <rect x="132" y="150" width="146" height="104" rx="12"/>
+                    <text x="205" y="182" class="t">Asignación</text>
+                    <text x="205" y="200" class="t">del encargo</text>
+                    <text x="205" y="222" class="s">~15 min por caso</text>
+                    <text x="205" y="237" class="s">no cuenta en las horas</text>
+                </g>
+                <g class="fl-node fase">
+                    <rect x="302" y="150" width="130" height="104" rx="12"/>
+                    <text x="367" y="172" class="k">FASE 1</text>
+                    <text x="367" y="192" class="t">Recepción y</text>
+                    <text x="367" y="209" class="t">revisión de la</text>
+                    <text x="367" y="226" class="t">información</text>
+                    <text x="367" y="244" class="s">~4 h por caso</text>
+                </g>
+                <g class="fl-node fase">
+                    <rect x="456" y="150" width="130" height="104" rx="12"/>
+                    <text x="521" y="180" class="k">FASE 2</text>
+                    <text x="521" y="200" class="t">Conciliación</text>
+                    <text x="521" y="217" class="t">fiscal</text>
+                    <text x="521" y="238" class="s">~8 h por caso</text>
+                </g>
+                <g class="fl-node socia">
+                    <rect x="476" y="316" width="170" height="64" rx="12"/>
+                    <text x="561" y="343" class="t">Revisión de la socia</text>
+                    <text x="561" y="363" class="s">Punto de control</text>
+                </g>
+                <g class="fl-node fase">
+                    <rect x="686" y="150" width="130" height="104" rx="12"/>
+                    <text x="751" y="172" class="k">FASE 3</text>
+                    <text x="751" y="192" class="t">Depuración y</text>
+                    <text x="751" y="209" class="t">liquidación</text>
+                    <text x="751" y="226" class="t">privada</text>
+                    <text x="751" y="244" class="s">~4 h por caso</text>
+                </g>
+                <g class="fl-node fase">
+                    <rect x="840" y="150" width="130" height="104" rx="12"/>
+                    <text x="905" y="180" class="k">FASE 4</text>
+                    <text x="905" y="200" class="t">Informe a la</text>
+                    <text x="905" y="217" class="t">gerencia</text>
+                    <text x="905" y="238" class="s">~4 h por caso</text>
+                </g>
+                <g class="fl-node cierre">
+                    <rect x="994" y="150" width="114" height="104" rx="12"/>
+                    <text x="1051" y="190" class="t">Firma y cierre</text>
+                    <text x="1051" y="211" class="s">Al final de</text>
+                    <text x="1051" y="226" class="s">cada caso</text>
+                </g>
+                <g class="fl-end">
+                    <rect x="1030" y="316" width="120" height="56" rx="28"/>
+                    <text x="1090" y="340">Fin del</text>
+                    <text x="1090" y="357">encargo</text>
+                </g>
+            </svg>
         </div>
     </div>
 
