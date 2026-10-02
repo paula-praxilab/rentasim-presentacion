@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 975 980" width="1950" height="1960" role="img" aria-label="Flujograma de la Fase 1 · Recepción y revisión de la información">
+<title>Flujograma de la Fase 1 · Recepción y revisión de la información</title>
+<style>
+  text { font-family: Inter, 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #1B2333; text-anchor: middle; }
+  tspan.n { font-weight: 800; }
+  .e { stroke: #5B6472; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+  .lb rect { fill: #F1F8F7; stroke: #A9D2CC; }
+  .lb text { font-size: 12px; font-weight: 600; fill: #2D6D66; }
+  .proc { fill: #fff; stroke: #1B2333; stroke-width: 1.4; }
+  .dec { fill: #F7F3EA; stroke: #8A6D3B; stroke-width: 1.4; }
+  .pre { fill: #EEF3FB; stroke: #2B4C8C; stroke-width: 1.4; }
+  .err { fill: #F8ECEA; stroke: #B03A3A; stroke-width: 1.6; stroke-dasharray: 5 3; }
+  .ai { fill: #F2F0FC; stroke: #6D5BD0; stroke-width: 1.6; }
+  .term { fill: #fff; stroke: #2D6D66; stroke-width: 1.8; }
+  .term + text, .tt { fill: #2D6D66; }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5B6472"/></marker></defs>
+<rect width="975" height="980" fill="#fff"/>
+<g><path class="e" d="M440,52 L440,80"/>
+<path class="e" d="M400,136 L400,166"/>
+<path class="e" d="M250,208 L250,254"/>
+<path class="e" d="M440,188 H560 V478 H372"/>
+<path class="e" d="M140,310 L140,360"/>
+<path class="e" d="M320,310 L320,360"/>
+<path class="e" d="M120,404 V428 H200 V448"/>
+<path class="e" d="M360,404 V428 H290 V448"/>
+<path class="e" d="M180,506 L180,546"/>
+<path class="e" d="M180,602 L180,652"/>
+<path class="e" d="M50,675 H22 V478 H108"/>
+<path class="e" d="M305,575 H480 V648"/>
+<path class="e" d="M500,704 L500,750"/>
+<path class="e" d="M642,752 V109 H572"/>
+<path class="e" d="M620,677 H820 V758"/>
+<path class="e" d="M820,802 L820,838"/>
+<path class="e" d="M820,896 L820,928"/></g>
+<g class="lb"><rect x="234" y="222" width="32" height="20" rx="10"/><text x="250" y="236">Sí</text>
+<rect x="544" y="320" width="32" height="20" rx="10"/><text x="560" y="334">No</text>
+<rect x="124" y="326" width="32" height="20" rx="10"/><text x="140" y="340">Sí</text>
+<rect x="304" y="326" width="32" height="20" rx="10"/><text x="320" y="340">No</text>
+<rect x="164" y="618" width="32" height="20" rx="10"/><text x="180" y="632">No</text>
+<rect x="384" y="565" width="32" height="20" rx="10"/><text x="400" y="579">Sí</text>
+<rect x="484" y="718" width="32" height="20" rx="10"/><text x="500" y="732">No</text>
+<rect x="724" y="667" width="32" height="20" rx="10"/><text x="740" y="681">Sí</text></g>
+<g><rect class="proc" x="305" y="10" width="270" height="42" rx="4"/><text x="440" y="35.5"><tspan class="n">1.</tspan> Revisa la tabla del expediente</text></g>
+<g><rect class="proc" x="310" y="82" width="260" height="54" rx="4"/><text x="440" y="105"><tspan class="n">2.</tspan> Marca o desmarca partidas</text><text x="440" y="122">sospechosas</text></g>
+<g><polygon class="dec" points="178,168 422,168 440,188 422,208 178,208 160,188"/><text x="300" y="192.5"><tspan class="n">3.</tspan> ¿Pide soporte de una partida?</text></g>
+<g><polygon class="dec" points="113,256 347,256 365,283 347,310 113,310 95,283"/><text x="230" y="279"><tspan class="n">4.</tspan> ¿Le queda cupo y no la había</text><text x="230" y="296">pedido?</text></g>
+<g><rect class="err" x="250" y="362" width="220" height="42" rx="3"/><text x="360" y="387.5"><tspan class="n">5.</tspan> Bloqueo con explicación</text></g>
+<g><rect class="pre" x="10" y="362" width="220" height="42" rx="2"/><line class="pre" x1="18" y1="362" x2="18" y2="404"/><line class="pre" x1="222" y1="362" x2="222" y2="404"/><text x="120" y="387.5"><tspan class="n">6.</tspan> Soporte queda pendiente</text></g>
+<g><rect class="proc" x="110" y="450" width="260" height="56" rx="4"/><text x="240" y="474"><tspan class="n">7.</tspan> Redacta y entrega el</text><text x="240" y="491">memorando de riesgos</text></g>
+<g><polygon class="dec" points="63,548 287,548 305,575 287,602 63,602 45,575"/><text x="175" y="571"><tspan class="n">8.</tspan> ¿El memorando tiene</text><text x="175" y="588">contenido real?</text></g>
+<g><rect class="err" x="50" y="654" width="260" height="42" rx="3"/><text x="180" y="679.5"><tspan class="n">9.</tspan> Corrección inmediata y gratuita</text></g>
+<g><polygon class="dec" points="358,650 602,650 620,677 602,704 358,704 340,677"/><text x="480" y="673"><tspan class="n">10.</tspan> ¿Marcó al menos 6 partidas y</text><text x="480" y="690">entregó el memorando?</text></g>
+<g><rect class="err" x="390" y="752" width="260" height="56" rx="3"/><text x="520" y="776"><tspan class="n">11.</tspan> Bloqueo: «Para avanzar te</text><text x="520" y="793">falta…»</text></g>
+<g><rect class="proc" x="680" y="760" width="280" height="42" rx="4"/><text x="820" y="785.5"><tspan class="n">12.</tspan> Clic en «Pasar a clasificación»</text></g>
+<g><rect class="pre" x="675" y="840" width="290" height="56" rx="2"/><line class="pre" x1="683" y1="840" x2="683" y2="896"/><line class="pre" x1="957" y1="840" x2="957" y2="896"/><text x="820" y="864"><tspan class="n">13.</tspan> El cliente contesta los soportes</text><text x="820" y="881">pendientes</text></g>
+<g><rect class="term" x="750" y="930" width="140" height="36" rx="18"/><text x="820" y="952.5" class="tt"><tspan class="n">14.</tspan> Ir a: Fase 2</text></g>
+</svg>

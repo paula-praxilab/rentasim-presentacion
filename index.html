@@ -150,14 +150,24 @@
         /* ===== TWO / THREE COLUMN ===== */
         .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 34px; margin-top: 22px; align-items: start; }
         .two-col.even { grid-template-columns: 1fr 1fr; }
+        .two-col.wide-left { grid-template-columns: 1.35fr 0.65fr; }
         .three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; margin-top: 22px; }
         @media (max-width: 900px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .two-col.wide-left { grid-template-columns: 1fr; } .two-col.wide-left > div { padding-top: 0 !important; } }
 
         .steps-list { list-style: none; padding: 0; counter-reset: st; }
         .steps-list.compact li { padding: 7px 0 7px 34px; font-size: 0.77em; }
         .steps-list li { counter-increment: st; position: relative; padding: 11px 0 11px 40px; font-size: 0.77em; color: #3a4250; line-height: 1.55; border-bottom: 1px solid var(--gray-light); }
         .steps-list li:last-child { border-bottom: none; }
         .steps-list li::before { content: counter(st); position: absolute; left: 0; top: 7px; width: 24px; height: 24px; border-radius: 50%; background: var(--rentasim); color: #fff; font-family: 'Inter'; font-weight: 800; font-size: 0.72em; display: flex; align-items: center; justify-content: center; }
+        .step-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 12px; }
+        .step-box { position: relative; background: var(--light); border-top: 4px solid var(--rentasim); border-radius: 10px; padding: 16px 16px 14px; }
+        .step-box .sb-n { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--rentasim); color: #fff; font-family: 'Inter'; font-weight: 800; font-size: 0.72em; margin-bottom: 8px; }
+        .step-box h4 { font-family: 'Inter', sans-serif; font-size: 0.82em; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+        .step-box p { font-size: 0.72em; color: #4A5568; line-height: 1.5; }
+        .step-box.key { background: #fff; border: 1.5px solid var(--rentasim); border-top-width: 4px; }
+        @media (max-width: 1024px) { .step-row { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .step-row { grid-template-columns: 1fr; } }
         .steps-list.even-gap li { min-height: 64px; display: flex; align-items: center; }
         .steps-list.even-gap li::before { top: 50%; transform: translateY(-50%); }
 
@@ -288,6 +298,15 @@
         /* ===== IMAGEN AMPLIABLE ===== */
         img.zoomable { cursor: zoom-in; transition: transform 0.2s ease; }
         img.zoomable:hover { transform: scale(1.02); }
+        .media-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .media-thumb { margin: 0; background: #fff; border: 1px solid var(--gray-light); border-radius: 12px; box-shadow: 0 4px 18px rgba(16,27,61,0.08); padding: 8px; }
+        .media-thumb .mt-frame { height: 230px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; background: #fff; }
+        .media-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+        .media-thumb figcaption { font-size: 0.68em; font-weight: 700; color: var(--rentasim-dark); text-align: center; margin-top: 6px; }
+        .media-solo { max-width: calc(640px + 2cm); margin: 28px auto 0; }
+        .media-solo .media-pair { gap: 2cm; }
+        .media-solo .mt-frame { height: 300px; }
+        @media (max-width: 560px) { .media-pair, .media-solo .media-pair { grid-template-columns: 1fr; gap: 18px; } }
         .zoom-hint { display: block; text-align: center; font-size: 0.7em; color: var(--gray); margin-top: 8px; }
         .lightbox { position: fixed; inset: 0; background: rgba(10,18,40,0.88); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 24px; cursor: zoom-out; }
         .lightbox.open { display: flex; }
@@ -347,9 +366,38 @@
 
             <div class="card-grid cols4">
                 <div class="card bd-teal"><div class="card-icon">🎓</div><h3>Para quién</h3><p>Pregrado en Contaduría Pública. Cursos de tributaria.</p></div>
-                <div class="card"><div class="card-icon">👤</div><h3>Modalidad</h3><p>Individual. Cada estudiante trabaja su propio encargo.</p></div>
-                <div class="card bd-amber"><div class="card-icon">⏱️</div><h3>Esfuerzo</h3><p>15 a 20 horas de trabajo autónomo, en varias sesiones.</p></div>
+                <div class="card"><div class="card-icon">👤</div><h3>Modalidad</h3><p>Individual. Cada estudiante trabaja su propio encargo: dos casos, uno detrás del otro.</p></div>
+                <div class="card bd-amber"><div class="card-icon">⏱️</div><h3>Esfuerzo</h3><p>15 a 20 horas de trabajo autónomo para los dos casos, en varias sesiones.</p></div>
                 <div class="card bd-purple"><div class="card-icon">📐</div><h3>Referente</h3><p>Año gravable 2025 y Estatuto Tributario vigente al firmar.</p></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================== SLIDE 2: QUÉ ES RENTASIM ===================== -->
+    <div class="slide" id="slide2">
+        <div class="slide-header">
+            <span class="block-tag">PraxiLab y RentaSim</span>
+            <h1>🧾 ¿Qué va a hacer el estudiante?</h1>
+            <h2>Su rol en la firma, y lo que produce en cada etapa del encargo</h2>
+            <div class="slide-number"></div>
+        </div>
+        <div class="slide-content">
+            <p class="lead">Durante el simulador, el estudiante forma parte del equipo de una <strong>firma de asesoría tributaria</strong> y tiene a su cargo un caso concreto: el de un cliente que la socia le asigna en plena temporada de cierre. Con los estados financieros bajo NIIF, las notas y el expediente documental en la mano, debe responder por ese encargo de principio a fin y entregar la <strong>conciliación fiscal</strong> y la <strong>declaración de renta</strong>, justificando cada ajuste como si tuviera que defenderlo ante un revisor real. Al cerrar ese primer cliente, la socia le asigna un <strong>segundo caso</strong>, de otra empresa, que recorre de nuevo desde el principio.</p>
+
+            <div class="stat-row cols3">
+                <div class="stat"><span class="st-n">👤 Su rol</span><span class="st-l">Analista junior: lee, decide, calcula y firma. Cada decisión es suya y queda registrada.</span></div>
+                <div class="stat b-purple"><span class="st-n">🗣️ Quién lo guía</span><span class="st-l">La socia de la firma: orienta con preguntas y revisa su trabajo, pero nunca le da la respuesta.</span></div>
+                <div class="stat b-blue"><span class="st-n">🏢 Para quién trabaja</span><span class="st-l">Para una firma de asesoría tributaria, que le confía dos casos asignados, uno tras otro, de los que debe responder hasta el final.</span></div>
+            </div>
+
+            <p class="lead" style="margin-top:20px;">El encargo avanza en cuatro fases, y cada una le exige un producto concreto:</p>
+
+            <div class="card-grid cols4">
+                <div class="card bd-teal"><div class="card-icon">📂</div><h3>Fase 1 · Revisa el expediente</h3><p>Lee cada partida con ojo crítico, marca las sospechosas, pide los soportes que faltan y entrega un <strong>memorando de riesgos</strong>.</p></div>
+                <div class="card"><div class="card-icon">🧮</div><h3>Fase 2 · Concilia y sustenta</h3><p>En cada partida decide el <strong>monto</strong>, el <strong>tipo</strong> de diferencia y la <strong>norma</strong> que la respalda, y declara su confianza.</p></div>
+                <div class="card bd-amber"><div class="card-icon">➗</div><h3>Fase 3 · Depura y liquida</h3><p>Parte de la utilidad contable, suma o resta sus ajustes y calcula él mismo la <strong>renta líquida gravable</strong>; luego revisa la liquidación del junior y calcula el <strong>anticipo</strong>.</p></div>
+                <div class="card bd-purple"><div class="card-icon">✉️</div><h3>Fase 4 · Informa y firma</h3><p>Escribe una <strong>carta al gerente</strong> en lenguaje de negocio y firma y presenta la declaración, un paso irreversible.</p></div>
             </div>
         </div>
     </div>
@@ -463,58 +511,29 @@
     </div>
 
 
-    <!-- ===================== SLIDE 2: QUÉ ES RENTASIM ===================== -->
-    <div class="slide" id="slide2">
-        <div class="slide-header">
-            <span class="block-tag">PraxiLab y RentaSim</span>
-            <h1>🧾 ¿Qué va a hacer el estudiante?</h1>
-            <h2>Su rol en la firma, y lo que produce en cada etapa del encargo</h2>
-            <div class="slide-number"></div>
-        </div>
-        <div class="slide-content">
-            <p class="lead">Durante el simulador, el estudiante forma parte del equipo de una <strong>firma de asesoría tributaria</strong> y tiene a su cargo un caso concreto: el de un cliente que la socia le asigna en plena temporada de cierre. Con los estados financieros bajo NIIF, las notas y el expediente documental en la mano, debe responder por ese encargo de principio a fin y entregar la <strong>conciliación fiscal</strong> y la <strong>declaración de renta</strong>, justificando cada ajuste como si tuviera que defenderlo ante un revisor real.</p>
-
-            <div class="stat-row cols3">
-                <div class="stat"><span class="st-n">👤 Su rol</span><span class="st-l">Analista junior: lee, decide, calcula y firma. Cada decisión es suya y queda registrada.</span></div>
-                <div class="stat b-purple"><span class="st-n">🗣️ Quién lo guía</span><span class="st-l">La socia de la firma: orienta con preguntas y revisa su trabajo, pero nunca le da la respuesta.</span></div>
-                <div class="stat b-blue"><span class="st-n">🏢 Para quién trabaja</span><span class="st-l">Para una firma de asesoría tributaria, que le confía un caso asignado del que debe responder hasta el final.</span></div>
-            </div>
-
-            <p class="lead" style="margin-top:20px;">El encargo avanza en cuatro fases, y cada una le exige un producto concreto:</p>
-
-            <div class="card-grid cols4">
-                <div class="card bd-teal"><div class="card-icon">📂</div><h3>Fase 1 · Revisa el expediente</h3><p>Lee cada partida con ojo crítico, marca las sospechosas, pide los soportes que faltan y entrega un <strong>memorando de riesgos</strong>.</p></div>
-                <div class="card"><div class="card-icon">🧮</div><h3>Fase 2 · Concilia y sustenta</h3><p>En cada partida decide el <strong>monto</strong>, el <strong>tipo</strong> de diferencia y la <strong>norma</strong> que la respalda, y declara su confianza.</p></div>
-                <div class="card bd-amber"><div class="card-icon">➗</div><h3>Fase 3 · Depura y liquida</h3><p>Parte de la utilidad contable, suma sus ajustes y calcula él mismo la <strong>renta líquida gravable</strong>: el sistema no le da el total.</p></div>
-                <div class="card bd-purple"><div class="card-icon">✉️</div><h3>Fase 4 · Informa y firma</h3><p>Escribe una <strong>carta al gerente</strong> en lenguaje de negocio y firma y presenta la declaración, un paso irreversible.</p></div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- ===================== SLIDE 4: CÓMO FUNCIONA (I) — TRES CASOS ===================== -->
     <div class="slide" id="slide4">
         <div class="slide-header">
             <span class="block-tag">La lógica del simulador</span>
             <h1>🎲 Tres casos, un motor determinista</h1>
-            <h2>El docente elige un caso; cada uno enseña algo distinto</h2>
+            <h2>Cada estudiante juega dos de los tres casos; cada uno enseña algo distinto</h2>
             <div class="slide-number"></div>
         </div>
         <div class="slide-content">
             <table class="data-table">
-                <thead><tr><th>Caso</th><th>Empresa</th><th>Utilidad → renta</th><th>Lo que enseña</th><th style="text-align:center;">Estado</th></tr></thead>
+                <thead><tr><th>Caso</th><th>Empresa</th><th>Utilidad → renta (con 12 partidas)</th><th>Lo que enseña</th><th style="text-align:center;">Estado</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>A</strong></td><td>Manufactura pyme</td><td>$850 M → $1.030 M</td><td>12 diferencias clásicas del cierre, todas suman, + 4 señuelos (16 partidas)</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
+                    <tr><td><strong>A</strong></td><td>Manufactura pyme</td><td>$850 M → $1.030 M</td><td>Diferencias clásicas del cierre, todas suman, + 4 señuelos</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
                     <tr><td><strong>B</strong></td><td>Servicios de TI</td><td>$700 M → $850 M</td><td>Los signos importan: aparecen las primeras deducciones</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
-                    <tr><td><strong>C</strong></td><td>Agroindustria</td><td>$520 M → $625 M</td><td>Juicio bajo ambigüedad: 4 de 12 partidas son de criterio</td><td style="text-align:center;"><span class="badge badge-green">Jugable</span></td></tr>
+                    <tr><td><strong>C</strong></td><td>Agroindustria</td><td>$520 M → $625 M</td><td>Juicio bajo ambigüedad: 4 de sus 12 partidas base son de criterio</td><td style="text-align:center;"><span class="badge badge-amber">Jugable · aún no para sumativa</span></td></tr>
                 </tbody>
             </table>
-            <p class="lead" style="margin-top:16px;">Los casos B y C tienen <strong>12 partidas</strong> cada uno; el caso A suma <strong>16</strong> — sus 12 ajustes reales más 4 señuelos. Ninguno asume haber cursado otro. El caso se puede fijar para todo el recurso o repartir <strong>por estudiante</strong> en PraxiLab.</p>
+            <p class="lead" style="margin-top:16px;">El <strong>docente decide cuántas partidas</strong> trae el expediente: cualquier número entre <strong>12 y 50</strong>, según el nivel y el tiempo de su grupo. Con 12, cada caso trae solo sus partidas base; cada partida adicional es una de ampliación, un tema que las base no tocan. El número es el mismo en los dos casos del estudiante y todo el grupo recibe las mismas partidas. En el caso A se suman además 4 señuelos. Ninguno asume haber cursado otro. El docente asigna un <strong>par ordenado de casos</strong> (A-B, A-C, B-A, B-C, C-A o C-B; por defecto A-B), igual para todo el recurso o <strong>por estudiante</strong> en PraxiLab, y cada caso vale el <strong>50 %</strong> de la nota.</p>
 
             <div class="card-grid cols3">
                 <div class="card bd-green">
                     <h3>Caso A · Manufactura pyme</h3>
-                    <p>El caso base: una pyme manufacturera cierra el año con una utilidad contable de $850 M. Su expediente reúne <strong>16 partidas</strong>: 12 ajustes clásicos de un primer curso tributario —depreciaciones, provisiones, multas— que todas suman a la renta líquida, más 4 señuelos: partidas que parecen sospechosas pero no requieren ajuste, para entrenar el criterio del estudiante desde la Fase 1.</p>
+                    <p>El caso base: una pyme manufacturera cierra el año con una utilidad contable de $850 M. Sus partidas base son ajustes clásicos de un primer curso tributario —depreciaciones, provisiones, multas— que todas suman a la renta líquida, más 4 señuelos: partidas que parecen sospechosas pero no requieren ajuste, para entrenar el criterio del estudiante desde la Fase 1.</p>
                 </div>
                 <div class="card bd-green">
                     <h3>Caso B · Servicios de TI</h3>
@@ -528,8 +547,9 @@
 
             <div class="factor-accordion">
                 <div class="factor-item active">
-                    <div class="factor-header factor-teal" onclick="toggleFactor(this)"><span>💡 ¿Qué caso le asigno a mi grupo?</span><span class="factor-icon">▼</span></div>
+                    <div class="factor-header factor-teal" onclick="toggleFactor(this)"><span>💡 ¿Qué caso pongo primero en el par?</span><span class="factor-icon">▼</span></div>
                     <div class="factor-body"><div class="factor-content" style="font-size:0.87em;">
+                        <em>El segundo suele ser el siguiente en dificultad (A → B, B → C).</em><br>
                         <strong>Primer espacio tributario</strong> → Caso A<br>
                         <strong>Ya vio renta, NIIF sólida</strong> → Caso B<br>
                         <strong>Segundo curso tributario o Consultorio</strong> → Caso C<br>
@@ -546,36 +566,43 @@
         <div class="slide-header">
             <span class="block-tag">Cómo programa el docente</span>
             <h1>🪜 Cómo programa el docente el encargo</h1>
-            <h2>Paso a paso, y los cuatro parámetros que lo configuran</h2>
+            <h2>Paso a paso, y los parámetros que lo configuran</h2>
             <div class="slide-number"></div>
         </div>
         <div class="slide-content">
-            <div class="two-col">
-                <div>
-                    <h3 class="sub-h">Paso a paso</h3>
-                    <ol class="steps-list compact">
-                        <li><strong>Abrir el curso</strong> — en PraxiLab, con rol docente.</li>
-                        <li><strong>Fijar los parámetros</strong> — el caso (uno para todo el grupo o uno por estudiante) y el apoyo que tendrán. Lo que no fije queda con el valor por defecto.</li>
-                        <li><strong>Guardar y enviar al simulador</strong> — hasta pulsarlo no llega nada a RentaSim. Hágalo antes de que entre el primer estudiante.</li>
-                        <li><strong>Presentar en aula</strong> — briefing y fecha de cierre.</li>
-                        <li><strong>Seguir la cohorte</strong> — desde la consola docente del recurso.</li>
-                    </ol>
-                </div>
+            <h3 class="sub-h">Paso a paso</h3>
+            <div class="step-row">
+                <div class="step-box"><span class="sb-n">1</span><h4>Abrir el curso</h4><p>En PraxiLab, con rol docente.</p></div>
+                <div class="step-box"><span class="sb-n">2</span><h4>Fijar los parámetros</h4><p>Par de casos (uno para todo el grupo o uno por estudiante), número de partidas y apoyo. Lo que no fije queda por defecto.</p></div>
+                <div class="step-box key"><span class="sb-n">3</span><h4>Guardar y enviar al simulador</h4><p>Hasta pulsarlo no llega nada a RentaSim. Hágalo antes de que entre el primer estudiante.</p></div>
+                <div class="step-box"><span class="sb-n">4</span><h4>Presentar en aula</h4><p>Briefing y fecha de cierre.</p></div>
+                <div class="step-box"><span class="sb-n">5</span><h4>Seguir la cohorte</h4><p>Desde la consola docente del recurso.</p></div>
+            </div>
+
+            <div class="two-col wide-left" style="margin-top:28px;">
                 <div>
                     <h3 class="sub-h teal">Parámetros del encargo</h3>
-                    <table class="data-table compact">
+                    <table class="data-table compact" style="margin-top:10px;">
                         <thead><tr><th>Parámetro</th><th>Rango</th><th>Por defecto</th></tr></thead>
                         <tbody>
-                            <tr><td>Caso asignado</td><td>A, B, C o por estudiante</td><td>A</td></tr>
-                            <tr><td>Ventana de corrección</td><td>Activa/inactiva + %</td><td>Activa, 80 %</td></tr>
+                            <tr><td>Casos asignados (en orden)</td><td>6 pares: A-B, A-C, B-A, B-C, C-A, C-B; o por estudiante</td><td>A-B</td></tr>
+                            <tr><td>Número de partidas</td><td>12 a 50, por caso</td><td>12</td></tr>
+                            <tr><td>Error del papel del junior (Fase 3)</td><td>Aritmética, conciliación, clasificación, liquidación, anticipo</td><td>Todas</td></tr>
+                            <tr><td>Ventana de corrección</td><td>Activa/inactiva (recupera el 80 % fijo)</td><td>Activa</td></tr>
                             <tr><td>Revisiones de la socia</td><td>0, 1 o 2</td><td>1</td></tr>
                             <tr><td>Presupuesto de consultas</td><td>0 a 8</td><td>5</td></tr>
                         </tbody>
                     </table>
-                    <div class="callout" style="margin-top:16px;">
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px; padding-top:34px;">
+                    <div class="callout">
                         <h4>🔒 Cuando entra el primer estudiante</h4>
-                        <p>Se congelan 3 parámetros, entre ellos el caso. Solo el presupuesto de consultas se puede subir en marcha.</p>
-                        <p>¿Otro grupo con otros valores? Publique otra actividad desde «Material de apoyo»; no consume licencias adicionales.</p>
+                        <p>Se congelan los parámetros, entre ellos el par de casos y el número de partidas. Solo el presupuesto de consultas se puede subir en marcha.</p>
+                        <p style="margin-bottom:0;">Consultas y revisiones de la socia se renuevan al empezar el caso 2.</p>
+                    </div>
+                    <div class="callout blue">
+                        <h4>➕ ¿Otro grupo con otros valores?</h4>
+                        <p style="margin-bottom:0;">Publique otra actividad desde «Material de apoyo»; no consume licencias adicionales.</p>
                     </div>
                 </div>
             </div>
@@ -588,7 +615,7 @@
         <div class="slide-header">
             <span class="block-tag">Evaluación del estudiante</span>
             <h1>📊 ¿Cómo va a ser evaluado?</h1>
-            <h2>Cuatro frentes, cada uno con su peso en la nota final</h2>
+            <h2>Cuatro frentes por caso; la nota final promedia los dos casos, 50 % cada uno</h2>
             <div class="slide-number"></div>
         </div>
         <div class="slide-content">
@@ -597,7 +624,7 @@
                 <tbody>
                     <tr><td>Clasifica las diferencias como permanentes o temporarias</td><td>Tipo elegido en cada partida</td><td style="text-align:center;">25 %</td></tr>
                     <tr><td>Sustenta cada ajuste con el fundamento normativo</td><td>Norma elegida + memorando</td><td style="text-align:center;">25 %</td></tr>
-                    <tr><td>Elabora la conciliación y liquida hasta renta líquida</td><td>Liquidación de la Fase 3</td><td style="text-align:center;">35 %</td></tr>
+                    <tr><td>Elabora la conciliación y liquida hasta renta líquida</td><td>Montos, revisión del papel del junior y anticipo</td><td style="text-align:center;">35 %</td></tr>
                     <tr><td>Evalúa la exposición fiscal</td><td>Carta al gerente</td><td style="text-align:center;">15 %</td></tr>
                 </tbody>
             </table>
@@ -606,7 +633,7 @@
             <div class="card-grid cols4">
                 <div class="card bd-teal"><div class="card-icon">🏷️</div><h3>Clasificación · 25 %</h3><p><strong>Qué mira:</strong> si cada partida es permanente, temporaria o sin efecto, incluidos los señuelos.</p><p><strong>Demuestra:</strong> que entiende la naturaleza de cada diferencia, no solo que existe.</p></div>
                 <div class="card"><div class="card-icon">📜</div><h3>Fundamento · 25 %</h3><p><strong>Qué mira:</strong> la norma elegida del catálogo para cada ajuste y el memorando de riesgos.</p><p><strong>Demuestra:</strong> que puede defender cada ajuste frente al Estatuto Tributario.</p></div>
-                <div class="card bd-amber"><div class="card-icon">➗</div><h3>Conciliación · 35 %</h3><p><strong>Qué mira:</strong> que llegue de la utilidad contable a la renta líquida con los montos y signos correctos.</p><p><strong>Demuestra:</strong> dominio técnico del cálculo; por eso es el frente de mayor peso.</p></div>
+                <div class="card bd-amber"><div class="card-icon">➗</div><h3>Conciliación · 35 %</h3><p><strong>Qué mira:</strong> que llegue de la utilidad contable a la renta líquida con los montos y signos correctos. Se reparte en 60 % montos de las partidas, 25 % revisión del papel del junior y 15 % anticipo.</p><p><strong>Demuestra:</strong> dominio técnico del cálculo; por eso es el frente de mayor peso.</p></div>
                 <div class="card bd-purple"><div class="card-icon">✉️</div><h3>Gestión del riesgo · 15 %</h3><p><strong>Qué mira:</strong> la carta al gerente, calificada con rúbrica: posiciones sólidas, riesgosas y recomendaciones.</p><p><strong>Demuestra:</strong> que sabe evaluar la exposición fiscal del cliente.</p></div>
             </div>
         </div>
@@ -696,26 +723,12 @@
                 <span class="j-step">Fase 4</span><span class="j-arrow">➜</span>
                 <span class="j-step">Firma y presentación</span>
             </div>
-            <div class="two-col">
-                <div>
-                    <h3 class="sub-h">Qué hace el estudiante</h3>
-                    <ol class="steps-list">
-                        <li>Revisa cada partida del expediente con su magnitud documental.</li>
-                        <li>Marca las que le parecen sospechosas — mínimo 6.</li>
-                        <li>Pide soportes faltantes; el cliente responde en la sesión siguiente, o no responde.</li>
-                        <li>Entrega un memorando de riesgos de unas 300 palabras.</li>
-                    </ol>
-                </div>
-                <div class="callout">
-                    <h4>🎯 Los señuelos</h4>
-                    <p>No todas requieren ajuste: el caso A trae 4 partidas sanas. Al cierre ve cuántas de sus marcas eran hallazgos reales.</p>
-                    <p><strong>Puerta de avance:</strong> no pasa a la Fase 2 sin las 6 marcas y el memorando.</p>
-                </div>
-            </div>
-            <div class="stat-row cols3">
-                <div class="stat b-blue"><span class="st-n">12 a 16 partidas</span><span class="st-l">Componen el expediente del cliente, según el caso.</span></div>
-                <div class="stat"><span class="st-n">≥ 6 marcadas</span><span class="st-l">Mínimo de partidas sospechosas para avanzar.</span></div>
-                <div class="stat b-amber"><span class="st-n">~300 palabras</span><span class="st-l">Extensión del memorando de riesgos.</span></div>
+            <div class="media-solo">
+                    <div class="media-pair">
+                        <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/flujo-fase1.svg" alt="Flujograma de la Fase 1, paso a paso"></div><figcaption>🗺️ Flujograma de la fase</figcaption></figure>
+                        <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/fase1-revision.png" alt="Pantalla de la Fase 1 en RentaSim: tabla del expediente con cada partida, su magnitud documental, la casilla para marcarla como sospechosa y el botón para pedir soporte"></div><figcaption>🖥️ Así se ve en pantalla</figcaption></figure>
+                    </div>
+                    <span class="zoom-hint">🔍 Clic en cada imagen para ampliarla</span>
             </div>
         </div>
     </div>
@@ -773,21 +786,12 @@
                 <span class="j-step">Fase 4</span><span class="j-arrow">➜</span>
                 <span class="j-step">Firma y presentación</span>
             </div>
-            <div class="two-col" style="align-items:center;">
-                <div>
-                    <h3 class="sub-h">Cuatro campos, por cada partida</h3>
-                    <ol class="steps-list compact">
-                        <li><strong>Monto</strong> — cuánto se ajusta, en pesos.</li>
-                        <li><strong>Tipo</strong> — permanente, temporaria o sin efecto.</li>
-                        <li><strong>Fundamento</strong> — una norma del catálogo, no texto libre.</li>
-                        <li><strong>Confianza</strong> — alta, media o baja.</li>
-                    </ol>
-                    <p style="font-size:0.77em;color:#667;margin-top:8px;">Todo se guarda al salir de cada campo. Aquí también puede pedir un soporte que olvidó en la Fase 1.</p>
+            <div class="media-solo">
+                <div class="media-pair">
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/flujo-fase2.svg" alt="Flujograma de la Fase 2, paso a paso"></div><figcaption>🗺️ Flujograma de la fase</figcaption></figure>
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/fase2-conciliacion.png" alt="Pantalla de la Fase 2 en RentaSim: partidas organizadas por carpetas y, por cada una, campos de monto del ajuste, tipo, confianza y fundamento"></div><figcaption>🖥️ Así se ve en pantalla</figcaption></figure>
                 </div>
-                <div>
-                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto2-clasificacion.png" alt="Pantalla de la Fase 2 en RentaSim: por cada partida, campos de monto del ajuste, tipo, confianza y fundamento" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
-                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
-                </div>
+                <span class="zoom-hint">🔍 Clic en cada imagen para ampliarla</span>
             </div>
         </div>
     </div>
@@ -807,7 +811,7 @@
                     <ul class="mini">
                         <li>La socia responde con una pregunta guía o la familia normativa.</li>
                         <li>Nunca le da la respuesta exacta.</li>
-                        <li>5 consultas por defecto, máx. 2 por partida.</li>
+                        <li>5 consultas por defecto en cada caso, máx. 2 por partida.</li>
                     </ul>
                 </div>
                 <div class="card bd-amber">
@@ -835,7 +839,7 @@
     <div class="slide" id="slide11">
         <div class="slide-header">
             <h1>➗ Fase 3 · Depuración y liquidación privada</h1>
-            <h2>4 horas · utilidad contable + sus ajustes = renta líquida</h2>
+            <h2>4 horas · su conciliación, la revisión del papel del junior y el anticipo</h2>
             <div class="slide-number"></div>
         </div>
         <div class="slide-content">
@@ -848,24 +852,12 @@
                 <span class="j-step">Fase 4</span><span class="j-arrow">➜</span>
                 <span class="j-step">Firma y presentación</span>
             </div>
-            <div class="two-col" style="align-items:center;">
-                <div>
-                    <h3 class="sub-h">Qué hace el estudiante</h3>
-                    <p style="color:#3a4250;line-height:1.65;font-size:0.77em;">Suma la utilidad contable antes de impuestos más cada uno de sus ajustes, partida por partida, hasta llegar a la renta líquida gravable. <strong>El sistema no muestra el total</strong>: liquidar es calcularlo, no copiar un número.</p>
-                    <div class="callout" style="margin-top:16px;">
-                        <h4>✅ Solo valida la aritmética</h4>
-                        <p>Le dice si sus columnas cuadran, no si su renta es la correcta. Eso se sabe al cierre, con la auditoría simulada.</p>
-                    </div>
+            <div class="media-solo">
+                <div class="media-pair">
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/flujo-fase3.svg" alt="Flujograma de la Fase 3, paso a paso"></div><figcaption>🗺️ Flujograma de la fase</figcaption></figure>
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/fase3-liquidacion.png" alt="Pantalla de la Fase 3 en RentaSim: utilidad contable antes de impuestos y, por cada ajuste de la Fase 2, si suma o resta, su clasificación y su monto"></div><figcaption>🖥️ Así se ve en pantalla</figcaption></figure>
                 </div>
-                <div>
-                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto3-liquidacion.png" alt="Pantalla de la Fase 3 en RentaSim: utilidad contable, ajustes y campo para declarar la renta líquida gravable" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
-                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
-                </div>
-            </div>
-            <div class="stat-row cols3">
-                <div class="stat b-blue"><span class="st-n">$850 M</span><span class="st-l">Utilidad contable antes de impuestos (caso A).</span></div>
-                <div class="stat b-amber"><span class="st-n">+ Ajustes de la Fase 2</span><span class="st-l">Cada uno con su propio signo y monto.</span></div>
-                <div class="stat"><span class="st-n">= $1.030 M</span><span class="st-l">Renta líquida gravable, si liquida bien.</span></div>
+                <span class="zoom-hint">🔍 Clic en cada imagen para ampliarla</span>
             </div>
         </div>
     </div>
@@ -888,28 +880,15 @@
                 <span class="j-step active">Fase 4 · Informe a la gerencia</span><span class="j-arrow">➜</span>
                 <span class="j-step">Firma y presentación</span>
             </div>
-            <div class="two-col" style="align-items:center;">
-                <div>
-                    <h3 class="sub-h">La carta</h3>
-                    <p style="color:#3a4250;line-height:1.65;font-size:0.77em;">En lenguaje de negocio, para un gerente que no es tributarista: por qué pagará lo que pagará, qué posiciones son sólidas, cuáles riesgosas, y qué hacer distinto el año entrante.</p>
-                    <div class="callout" style="margin-top:16px;">
-                        <h4>🔒 Firma y presentación</h4>
-                        <p>El estudiante confirma que entiende que es <strong>irreversible</strong> y firma y presenta la declaración. Se congela el estado y se archiva una copia inalterable.</p>
-                        <p>La IA lee la carta y aporta la dimensión de <strong>gestión del riesgo (15 %)</strong>, con rúbrica, sin decidir cifras ni normas.</p>
-                    </div>
+            <div class="media-solo">
+                <div class="media-pair">
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/flujo-fase4.svg" alt="Flujograma de la Fase 4, paso a paso"></div><figcaption>🗺️ Flujograma de la fase</figcaption></figure>
+                    <figure class="media-thumb"><div class="mt-frame"><img class="zoomable" onclick="openLightbox(this)" src="assets/fase4-informe.png" alt="Pantalla de la Fase 4 en RentaSim: recuadro para la carta al gerente y bloque obligatorio con el método y el monto del anticipo"></div><figcaption>🖥️ Así se ve en pantalla</figcaption></figure>
                 </div>
-                <div>
-                    <img class="zoomable" onclick="openLightbox(this)" src="assets/acto4-carta.png" alt="Pantalla de la Fase 4 en RentaSim: recuadro para escribir la carta al gerente y botón para firmar y presentar la declaración" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
-                    <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
-                </div>
-            </div>
-            <div class="stat-row">
-                <div class="stat b-purple"><span class="st-n">15 %</span><span class="st-l">De la nota final: la carta y su gestión del riesgo.</span></div>
-                <div class="stat b-red"><span class="st-n">Irreversible</span><span class="st-l">La declaración presentada se archiva como copia inalterable.</span></div>
+                <span class="zoom-hint">🔍 Clic en cada imagen para ampliarla</span>
             </div>
         </div>
     </div>
-
 
 
     <!-- ===================== SLIDE: CIERRE — NOTA Y PDF ===================== -->
@@ -933,7 +912,8 @@
                 <div>
                     <h3 class="sub-h">Qué recibe al cerrar el encargo</h3>
                     <ol class="steps-list compact">
-                        <li><strong>Su nota final</strong> — en escala de 1,0 a 5,0, registrada en PraxiLab.</li>
+                        <li><strong>Su nota por caso</strong> — en escala de 1,0 a 5,0. Al cerrar el caso 1, PraxiLab registra la mitad como nota parcial; al cerrar el caso 2, la nota final es el promedio de los dos.</li>
+                        <li><strong>Una segunda oportunidad</strong> — si el docente activó la ventana de corrección, ve qué partidas falló y en qué, nunca la respuesta, y recupera el 80 % de lo que mejore.</li>
                         <li><strong>El desglose</strong> — la nota de cada frente: clasificación, sustentación, exactitud y riesgo.</li>
                         <li><strong>Su ojo en la Fase 1</strong> — cuántas de sus marcas eran hallazgos reales y cuántas señuelos.</li>
                         <li><strong>Un PDF descargable</strong> — con la nota desglosada y la retroalimentación del encargo.</li>
@@ -944,7 +924,7 @@
                     </div>
                 </div>
                 <div>
-                    <img class="zoomable" onclick="openLightbox(this)" src="assets/cierre-nota.png" alt="Pantalla de cierre de RentaSim: actividad culminada, botón para descargar el expediente profesional en PDF, nota final y desglose por frente" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
+                    <img class="zoomable" onclick="openLightbox(this)" src="assets/cierre-encargo.png" alt="Pantalla de RentaSim al cerrar el encargo: actividad culminada, descarga del expediente profesional en PDF, nota final del encargo con la nota de cada caso y desglose por dimensión" style="display:block; max-width:100%; border-radius:14px; box-shadow: var(--shadow); border: 1px solid var(--gray-light);">
                     <span class="zoom-hint">🔍 Clic en la imagen para ampliarla</span>
                 </div>
             </div>

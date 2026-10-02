@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1015" width="1600" height="2030" role="img" aria-label="Flujograma de la Fase 4 · Informe a la gerencia y sellado">
+<title>Flujograma de la Fase 4 · Informe a la gerencia y sellado</title>
+<style>
+  text { font-family: Inter, 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #1B2333; text-anchor: middle; }
+  tspan.n { font-weight: 800; }
+  .e { stroke: #5B6472; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+  .lb rect { fill: #F1F8F7; stroke: #A9D2CC; }
+  .lb text { font-size: 12px; font-weight: 600; fill: #2D6D66; }
+  .proc { fill: #fff; stroke: #1B2333; stroke-width: 1.4; }
+  .dec { fill: #F7F3EA; stroke: #8A6D3B; stroke-width: 1.4; }
+  .pre { fill: #EEF3FB; stroke: #2B4C8C; stroke-width: 1.4; }
+  .err { fill: #F8ECEA; stroke: #B03A3A; stroke-width: 1.6; stroke-dasharray: 5 3; }
+  .ai { fill: #F2F0FC; stroke: #6D5BD0; stroke-width: 1.6; }
+  .term { fill: #fff; stroke: #2D6D66; stroke-width: 1.8; }
+  .term + text, .tt { fill: #2D6D66; }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5B6472"/></marker></defs>
+<rect width="800" height="1015" fill="#fff"/>
+<g><path class="e" d="M460,52 L460,78"/>
+<path class="e" d="M500,134 L500,158"/>
+<path class="e" d="M340,187 H220 V242"/>
+<path class="e" d="M85,265 H50 V31 H273"/>
+<path class="e" d="M520,214 L520,242"/>
+<path class="e" d="M520,286 L520,312"/>
+<path class="e" d="M520,368 L520,392"/>
+<path class="e" d="M520,448 L520,472"/>
+<path class="e" d="M520,528 L520,552"/>
+<path class="e" d="M520,608 L520,632"/>
+<path class="e" d="M520,676 L520,700"/>
+<path class="e" d="M610,772 L610,800"/>
+<path class="e" d="M420,772 L420,884"/>
+<path class="e" d="M640,856 V870 H560 V884"/>
+<path class="e" d="M480,940 L480,966"/></g>
+<g class="lb"><rect x="264" y="177" width="32" height="20" rx="10"/><text x="280" y="191">No</text>
+<rect x="504" y="218" width="32" height="20" rx="10"/><text x="520" y="232">Sí</text>
+<rect x="594" y="776" width="32" height="20" rx="10"/><text x="610" y="790">Sí</text>
+<rect x="404" y="820" width="32" height="20" rx="10"/><text x="420" y="834">No</text></g>
+<g><rect class="proc" x="275" y="10" width="250" height="42" rx="4"/><text x="400" y="35.5"><tspan class="n">1.</tspan> Escribe la carta al gerente</text></g>
+<g><rect class="proc" x="355" y="80" width="290" height="54" rx="4"/><text x="500" y="103"><tspan class="n">2.</tspan> Diligencia el bloque del anticipo:</text><text x="500" y="120">método y monto</text></g>
+<g><polygon class="dec" points="358,160 642,160 660,187 642,214 358,214 340,187"/><text x="500" y="183"><tspan class="n">3.</tspan> ¿La carta tiene contenido real y</text><text x="500" y="200">el bloque está completo?</text></g>
+<g><rect class="err" x="85" y="244" width="270" height="42" rx="3"/><text x="220" y="269.5"><tspan class="n">4.</tspan> Corrección inmediata y gratuita</text></g>
+<g><rect class="proc" x="395" y="244" width="250" height="42" rx="4"/><text x="520" y="269.5"><tspan class="n">5.</tspan> Clic en «Entregar carta»</text></g>
+<g><rect class="proc" x="385" y="314" width="270" height="54" rx="4"/><text x="520" y="337"><tspan class="n">6.</tspan> Marca «Entiendo que sellar es</text><text x="520" y="354">irreversible»</text></g>
+<g><rect class="proc" x="385" y="394" width="270" height="54" rx="4"/><text x="520" y="417"><tspan class="n">7.</tspan> Clic en «Sellar y presentar la</text><text x="520" y="434">declaración»</text></g>
+<g><rect class="ai" x="385" y="474" width="270" height="54" rx="10"/><text x="520" y="497"><tspan class="n">8.</tspan> La IA evalúa el memorando y la</text><text x="520" y="514">carta</text></g>
+<g><rect class="pre" x="380" y="554" width="280" height="54" rx="2"/><line class="pre" x1="388" y1="554" x2="388" y2="608"/><line class="pre" x1="652" y1="554" x2="652" y2="608"/><text x="520" y="577"><tspan class="n">9.</tspan> El motor determinista calcula la</text><text x="520" y="594">evaluación</text></g>
+<g><rect class="pre" x="420" y="634" width="200" height="42" rx="2"/><line class="pre" x1="428" y1="634" x2="428" y2="676"/><line class="pre" x1="612" y1="634" x2="612" y2="676"/><text x="520" y="659.5"><tspan class="n">10.</tspan> Auditoría simulada</text></g>
+<g><polygon class="dec" points="388,702 652,702 670,737 652,772 388,772 370,737"/><text x="520" y="724.5"><tspan class="n">11.</tspan> ¿El memorando o la carta</text><text x="520" y="741.5">fueron descartados por la</text><text x="520" y="758.5">compuerta?</text></g>
+<g><rect class="pre" x="510" y="802" width="260" height="54" rx="2"/><line class="pre" x1="518" y1="802" x2="518" y2="856"/><line class="pre" x1="762" y1="802" x2="762" y2="856"/><text x="640" y="825"><tspan class="n">12.</tspan> Marca la sesión para revisión</text><text x="640" y="842">docente</text></g>
+<g><rect class="pre" x="340" y="886" width="280" height="54" rx="2"/><line class="pre" x1="348" y1="886" x2="348" y2="940"/><line class="pre" x1="612" y1="886" x2="612" y2="940"/><text x="480" y="909"><tspan class="n">13.</tspan> Guarda la evidencia sellada en</text><text x="480" y="926">S3</text></g>
+<g><rect class="term" x="365" y="968" width="230" height="36" rx="18"/><text x="480" y="990.5" class="tt"><tspan class="n">14.</tspan> Ir a: Firma y presentación</text></g>
+</svg>

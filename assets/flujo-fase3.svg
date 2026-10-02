@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="1680" height="2160" role="img" aria-label="Flujograma de la Fase 3 · Depuración y liquidación privada">
+<title>Flujograma de la Fase 3 · Depuración y liquidación privada</title>
+<style>
+  text { font-family: Inter, 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #1B2333; text-anchor: middle; }
+  tspan.n { font-weight: 800; }
+  .e { stroke: #5B6472; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+  .lb rect { fill: #F1F8F7; stroke: #A9D2CC; }
+  .lb text { font-size: 12px; font-weight: 600; fill: #2D6D66; }
+  .proc { fill: #fff; stroke: #1B2333; stroke-width: 1.4; }
+  .dec { fill: #F7F3EA; stroke: #8A6D3B; stroke-width: 1.4; }
+  .pre { fill: #EEF3FB; stroke: #2B4C8C; stroke-width: 1.4; }
+  .err { fill: #F8ECEA; stroke: #B03A3A; stroke-width: 1.6; stroke-dasharray: 5 3; }
+  .ai { fill: #F2F0FC; stroke: #6D5BD0; stroke-width: 1.6; }
+  .term { fill: #fff; stroke: #2D6D66; stroke-width: 1.8; }
+  .term + text, .tt { fill: #2D6D66; }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5B6472"/></marker></defs>
+<rect width="840" height="1080" fill="#fff"/>
+<g><path class="e" d="M440,52 L440,78"/>
+<path class="e" d="M460,134 L460,158"/>
+<path class="e" d="M325,181 H200 V230"/>
+<path class="e" d="M75,253 H40 V31 H228"/>
+<path class="e" d="M480,202 L480,228"/>
+<path class="e" d="M460,284 L460,312"/>
+<path class="e" d="M650,257 H800 V977 H767"/>
+<path class="e" d="M440,368 L440,392"/>
+<path class="e" d="M440,436 L440,460"/>
+<path class="e" d="M440,516 L440,540"/>
+<path class="e" d="M440,596 L440,620"/>
+<path class="e" d="M440,664 L440,688"/>
+<path class="e" d="M440,744 L440,768"/>
+<path class="e" d="M440,824 L440,848"/>
+<path class="e" d="M330,920 L330,948"/>
+<path class="e" d="M110,971 H75 V717 H298"/>
+<path class="e" d="M540,920 L540,948"/>
+<path class="e" d="M620,1004 L620,1030"/></g>
+<g class="lb"><rect x="244" y="171" width="32" height="20" rx="10"/><text x="260" y="185">No</text>
+<rect x="464" y="205" width="32" height="20" rx="10"/><text x="480" y="219">Sí</text>
+<rect x="444" y="288" width="32" height="20" rx="10"/><text x="460" y="302">Sí</text>
+<rect x="784" y="590" width="32" height="20" rx="10"/><text x="800" y="604">No</text>
+<rect x="314" y="924" width="32" height="20" rx="10"/><text x="330" y="938">No</text>
+<rect x="524" y="924" width="32" height="20" rx="10"/><text x="540" y="938">Sí</text></g>
+<g><rect class="proc" x="230" y="10" width="260" height="42" rx="4"/><text x="360" y="35.5"><tspan class="n">1.</tspan> Paso 1 · Arma su conciliación</text></g>
+<g><rect class="proc" x="320" y="80" width="280" height="54" rx="4"/><text x="460" y="103"><tspan class="n">2.</tspan> Declara la renta líquida gravable</text><text x="460" y="120">y guarda</text></g>
+<g><polygon class="dec" points="343,160 577,160 595,181 577,202 343,202 325,181"/><text x="460" y="185.5"><tspan class="n">3.</tspan> ¿Cuadra aritméticamente?</text></g>
+<g><rect class="err" x="75" y="232" width="250" height="42" rx="3"/><text x="200" y="257.5"><tspan class="n">4.</tspan> «La conciliación no cuadra»</text></g>
+<g><polygon class="dec" points="368,230 632,230 650,257 632,284 368,284 350,257"/><text x="500" y="253"><tspan class="n">5.</tspan> ¿El encargo incluye la revisión</text><text x="500" y="270">del junior?</text></g>
+<g><rect class="proc" x="295" y="314" width="290" height="54" rx="4"/><text x="440" y="337"><tspan class="n">6.</tspan> Clic en «Pasar mi conciliación al</text><text x="440" y="354">junior»</text></g>
+<g><rect class="pre" x="300" y="394" width="280" height="42" rx="2"/><line class="pre" x1="308" y1="394" x2="308" y2="436"/><line class="pre" x1="572" y1="394" x2="572" y2="436"/><text x="440" y="419.5"><tspan class="n">7.</tspan> El motor arma el papel del junior</text></g>
+<g><rect class="pre" x="300" y="462" width="280" height="54" rx="2"/><line class="pre" x1="308" y1="462" x2="308" y2="516"/><line class="pre" x1="572" y1="462" x2="572" y2="516"/><text x="440" y="485"><tspan class="n">8.</tspan> Siembra exactamente un error,</text><text x="440" y="502">sorteado por semilla</text></g>
+<g><rect class="proc" x="295" y="542" width="290" height="54" rx="4"/><text x="440" y="565"><tspan class="n">9.</tspan> Paso 2 · Marca la línea errada, la</text><text x="440" y="582">corrige y elige el tipo de error</text></g>
+<g><rect class="proc" x="300" y="622" width="280" height="42" rx="4"/><text x="440" y="647.5"><tspan class="n">10.</tspan> Entrega la revisión: una sola vez</text></g>
+<g><rect class="proc" x="300" y="690" width="280" height="54" rx="4"/><text x="440" y="713"><tspan class="n">11.</tspan> Paso 3 · Calcula el anticipo por</text><text x="440" y="730">los dos métodos</text></g>
+<g><rect class="proc" x="300" y="770" width="280" height="54" rx="4"/><text x="440" y="793"><tspan class="n">12.</tspan> Elige el método y el motivo, y</text><text x="440" y="810">guarda</text></g>
+<g><polygon class="dec" points="298,850 582,850 600,885 582,920 298,920 280,885"/><text x="440" y="872.5"><tspan class="n">13.</tspan> ¿Conciliación cuadrada,</text><text x="440" y="889.5">revisión entregada y anticipo</text><text x="440" y="906.5">guardado?</text></g>
+<g><rect class="err" x="110" y="950" width="240" height="42" rx="3"/><text x="230" y="975.5"><tspan class="n">14.</tspan> Bloqueo con explicación</text></g>
+<g><rect class="proc" x="475" y="950" width="290" height="54" rx="4"/><text x="620" y="973"><tspan class="n">15.</tspan> Clic en «Pasar a sustentación»</text><text x="620" y="990">(al final)</text></g>
+<g><rect class="term" x="545" y="1032" width="150" height="36" rx="18"/><text x="620" y="1054.5" class="tt"><tspan class="n">16.</tspan> Ir a: Fase 4</text></g>
+</svg>

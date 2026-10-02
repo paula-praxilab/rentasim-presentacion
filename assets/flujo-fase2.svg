@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 990 1190" width="1980" height="2380" role="img" aria-label="Flujograma de la Fase 2 · Conciliación fiscal">
+<title>Flujograma de la Fase 2 · Conciliación fiscal</title>
+<style>
+  text { font-family: Inter, 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #1B2333; text-anchor: middle; }
+  tspan.n { font-weight: 800; }
+  .e { stroke: #5B6472; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+  .lb rect { fill: #F1F8F7; stroke: #A9D2CC; }
+  .lb text { font-size: 12px; font-weight: 600; fill: #2D6D66; }
+  .proc { fill: #fff; stroke: #1B2333; stroke-width: 1.4; }
+  .dec { fill: #F7F3EA; stroke: #8A6D3B; stroke-width: 1.4; }
+  .pre { fill: #EEF3FB; stroke: #2B4C8C; stroke-width: 1.4; }
+  .err { fill: #F8ECEA; stroke: #B03A3A; stroke-width: 1.6; stroke-dasharray: 5 3; }
+  .ai { fill: #F2F0FC; stroke: #6D5BD0; stroke-width: 1.6; }
+  .term { fill: #fff; stroke: #2D6D66; stroke-width: 1.8; }
+  .term + text, .tt { fill: #2D6D66; }
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5B6472"/></marker></defs>
+<rect width="990" height="1190" fill="#fff"/>
+<g><path class="e" d="M380,52 V66 H280 V80"/>
+<path class="e" d="M280,124 L280,148"/>
+<path class="e" d="M280,204 L280,228"/>
+<path class="e" d="M280,284 L280,308"/>
+<path class="e" d="M200,364 L200,398"/>
+<path class="e" d="M65,421 H35 V103 H148"/>
+<path class="e" d="M425,337 H560 V394"/>
+<path class="e" d="M520,450 L520,478"/>
+<path class="e" d="M400,534 L400,564"/>
+<path class="e" d="M600,534 L600,564"/>
+<path class="e" d="M705,423 H860 V671 H667"/>
+<path class="e" d="M330,620 V636 H460 V648"/>
+<path class="e" d="M680,620 V636 H580 V648"/>
+<path class="e" d="M420,692 L420,720"/>
+<path class="e" d="M620,692 L620,792"/>
+<path class="e" d="M380,764 V778 H460 V792"/>
+<path class="e" d="M520,848 L520,876"/>
+<path class="e" d="M440,932 L440,968"/>
+<path class="e" d="M250,997 H15 V31 H328"/>
+<path class="e" d="M680,905 H800 V978"/>
+<path class="e" d="M800,1022 L800,1050"/>
+<path class="e" d="M720,1106 L720,1138"/>
+<path class="e" d="M880,1106 L880,1138"/></g>
+<g class="lb"><rect x="184" y="372" width="32" height="20" rx="10"/><text x="200" y="386">No</text>
+<rect x="484" y="327" width="32" height="20" rx="10"/><text x="500" y="341">Sí</text>
+<rect x="504" y="455" width="32" height="20" rx="10"/><text x="520" y="469">Sí</text>
+<rect x="384" y="540" width="32" height="20" rx="10"/><text x="400" y="554">Sí</text>
+<rect x="584" y="540" width="32" height="20" rx="10"/><text x="600" y="554">No</text>
+<rect x="844" y="530" width="32" height="20" rx="10"/><text x="860" y="544">No</text>
+<rect x="404" y="696" width="32" height="20" rx="10"/><text x="420" y="710">Sí</text>
+<rect x="604" y="733" width="32" height="20" rx="10"/><text x="620" y="747">No</text>
+<rect x="424" y="941" width="32" height="20" rx="10"/><text x="440" y="955">No</text>
+<rect x="724" y="895" width="32" height="20" rx="10"/><text x="740" y="909">Sí</text>
+<rect x="704" y="1112" width="32" height="20" rx="10"/><text x="720" y="1126">Sí</text>
+<rect x="864" y="1112" width="32" height="20" rx="10"/><text x="880" y="1126">No</text></g>
+<g><rect class="proc" x="330" y="10" width="300" height="42" rx="4"/><text x="480" y="35.5"><tspan class="n">1.</tspan> Elige carpeta y partida en la bandeja</text></g>
+<g><rect class="proc" x="150" y="82" width="260" height="42" rx="4"/><text x="280" y="107.5"><tspan class="n">2.</tspan> Diligencia la partida activa</text></g>
+<g><rect class="proc" x="145" y="150" width="270" height="54" rx="4"/><text x="280" y="173"><tspan class="n">3.</tspan> Elige el fundamento en el</text><text x="280" y="190">buscador del catálogo</text></g>
+<g><rect class="pre" x="145" y="230" width="270" height="54" rx="2"/><line class="pre" x1="153" y1="230" x2="153" y2="284"/><line class="pre" x1="407" y1="230" x2="407" y2="284"/><text x="280" y="253"><tspan class="n">4.</tspan> Autoguardado al salir de cada</text><text x="280" y="270">campo</text></g>
+<g><polygon class="dec" points="153,310 407,310 425,337 407,364 153,364 135,337"/><text x="280" y="333"><tspan class="n">5.</tspan> ¿El monto es un entero en</text><text x="280" y="350">pesos, mayor o igual a 0?</text></g>
+<g><rect class="err" x="65" y="400" width="270" height="42" rx="3"/><text x="200" y="425.5"><tspan class="n">6.</tspan> Corrección inmediata y gratuita</text></g>
+<g><polygon class="dec" points="433,396 687,396 705,423 687,450 433,450 415,423"/><text x="560" y="419"><tspan class="n">7.</tspan> ¿Consulta a la socia en esta</text><text x="560" y="436">partida?</text></g>
+<g><polygon class="dec" points="368,480 632,480 650,507 632,534 368,534 350,507"/><text x="500" y="503"><tspan class="n">8.</tspan> ¿Le quedan consultas y no ha</text><text x="500" y="520">agotado los 2 niveles?</text></g>
+<g><rect class="err" x="545" y="566" width="270" height="54" rx="3"/><text x="680" y="589"><tspan class="n">9.</tspan> Bloqueo: sin consultas o ya</text><text x="680" y="606">recibió los 2 niveles</text></g>
+<g><rect class="ai" x="180" y="566" width="300" height="54" rx="10"/><text x="330" y="589"><tspan class="n">10.</tspan> Pista de la socia: nivel 1</text><text x="330" y="606">pregunta, nivel 2 familia normativa</text></g>
+<g><polygon class="dec" points="393,650 647,650 665,671 647,692 393,692 375,671"/><text x="520" y="675.5"><tspan class="n">11.</tspan> ¿Pide soporte de una partida?</text></g>
+<g><rect class="pre" x="245" y="722" width="270" height="42" rx="2"/><line class="pre" x1="253" y1="722" x2="253" y2="764"/><line class="pre" x1="507" y1="722" x2="507" y2="764"/><text x="380" y="747.5"><tspan class="n">12.</tspan> Respuesta inmediata del cliente</text></g>
+<g><rect class="pre" x="375" y="794" width="290" height="54" rx="2"/><line class="pre" x1="383" y1="794" x2="383" y2="848"/><line class="pre" x1="657" y1="794" x2="657" y2="848"/><text x="520" y="817"><tspan class="n">13.</tspan> Señales de la socia (no revelan</text><text x="520" y="834">la respuesta)</text></g>
+<g><polygon class="dec" points="378,878 662,878 680,905 662,932 378,932 360,905"/><text x="520" y="901"><tspan class="n">14.</tspan> ¿Todas las partidas tienen</text><text x="520" y="918">monto, tipo y fundamento?</text></g>
+<g><rect class="proc" x="250" y="970" width="300" height="54" rx="4"/><text x="400" y="993"><tspan class="n">15.</tspan> «Guardar y seguir» (o Enter)</text><text x="400" y="1010">lleva a la siguiente pendiente</text></g>
+<g><rect class="proc" x="660" y="980" width="280" height="42" rx="4"/><text x="800" y="1005.5"><tspan class="n">16.</tspan> Clic en «Cerrar clasificación»</text></g>
+<g><polygon class="dec" points="673,1052 927,1052 945,1079 927,1106 673,1106 655,1079"/><text x="800" y="1075"><tspan class="n">17.</tspan> ¿Le quedan revisiones de la</text><text x="800" y="1092">socia?</text></g>
+<g><rect class="term" x="595" y="1140" width="210" height="36" rx="18"/><text x="700" y="1162.5" class="tt"><tspan class="n">18.</tspan> Ir a: Revisión de la socia</text></g>
+<g><rect class="term" x="830" y="1140" width="140" height="36" rx="18"/><text x="900" y="1162.5" class="tt"><tspan class="n">19.</tspan> Ir a: Fase 3</text></g>
+</svg>
